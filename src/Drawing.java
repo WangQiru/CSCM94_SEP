@@ -1,6 +1,7 @@
-import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JLabel;
@@ -9,9 +10,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.PaintEvent;
+import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Display;
@@ -21,11 +25,14 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 
+import tree.TreeNode;
+
 public class Drawing {
-	private static Point sPoint;
 	Display display = new Display();
 	Shell shell = new Shell(display);
 	Canvas canvas = new Canvas(shell, SWT.NONE);
+
+	GC gc = new GC(canvas);
 
 	public static void main(String[] args) {
 		new Drawing();
@@ -40,22 +47,22 @@ public class Drawing {
 
 		shell.open();
 		shell.setSize(400, 450);
-		
+
 		Button btnClear = new Button(shell, SWT.NONE);
 		btnClear.setBounds(276, 20, 80, 27);
 		btnClear.setText("Clear");
 		btnClear.addSelectionListener(new SelectionListener() {
 
-		      public void widgetSelected(SelectionEvent event) {
-		        canvas.redraw();
-		      }
+			public void widgetSelected(SelectionEvent event) {
+				canvas.redraw();
+			}
 
 			@Override
 			public void widgetDefaultSelected(SelectionEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
-		    });
+		});
 
 
 		while (!shell.isDisposed()) {
@@ -143,11 +150,6 @@ public class Drawing {
 
 	private void setToRectangle(){
 
-
-		//		String response = JOptionPane.showInputDialog
-		//			      ( "What is the length for the rectangle?" );
-
-
 		JTextField heightField = new JTextField(5);
 		JTextField widthField = new JTextField(5);
 
@@ -197,21 +199,23 @@ public class Drawing {
 			Listener selectXY = new Listener() {
 				@Override
 				public void handleEvent(Event e) {
-					GC gc = new GC(canvas);
+					
 					int actualWidth = width;
 					int actualHeight = height;
-					
+
 					if((e.x+width)>canvas.getSize().x){
 						actualWidth=canvas.getSize().x-e.x-1;
 						System.out.println(actualWidth);
-						}
-					
+					}
+
 					if((e.y+height)>canvas.getSize().y){
 						actualHeight=canvas.getSize().y-e.y-1;
 						System.out.println(actualHeight);
-						}
-					gc.drawRectangle(e.x, e.y, actualWidth, actualHeight);
-					gc.dispose();						
+					}
+					
+
+			        gc.drawRectangle(e.x, e.y, actualWidth, actualHeight);
+										
 				}
 			};
 			canvas.addListener(SWT.MouseDown, selectXY);
@@ -219,14 +223,23 @@ public class Drawing {
 	}
 
 	private void setToSquare(){
-		GC gc = new GC(canvas);
-		gc.drawRectangle(60, 60, 60, 60);
-		gc.dispose();
+		canvas.addPaintListener(new PaintListener(){
+	        public void paintControl(PaintEvent e){
+	            Rectangle clientArea = shell.getClientArea();
+	         e.gc.drawPolygon(new int[] {125,105,145,145,105,145});
+	        }
+	    });
+		canvas.redraw();
 	}
 
 	private void setToTriangle(){
-		GC gc = new GC(canvas);
 		gc.drawPolygon(new int[] {125,105,145,145,105,145});
-		gc.dispose();
+		
+		ArrayList<String> root=new ArrayList<String>();
+		TreeNode<List<String>> tree = new TreeNode<List<String>>(root);
+		ArrayList<String> left=new ArrayList<String>();
+		ArrayList<String> right=new ArrayList<String>();
+		tree.addChild(left);
 	}
+
 }
