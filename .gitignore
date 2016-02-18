@@ -50,3 +50,7 @@ Temporary Items
 *.class
 hs_err_pid*
 
+# Visual Paradigm
+*.vpp.working
+*.vpp~*
+*.vux

@@ -39,6 +39,7 @@ public class Drawing {
 	}
 
 	private Drawing(){		
+		
 		shell.setText("CSG Drawing Pad");
 		shell.setLayout(null);
 
