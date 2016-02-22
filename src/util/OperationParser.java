@@ -18,21 +18,22 @@ public class OperationParser {
 					if(operation[1].equals("union")){						
 						//union
 					}
-					if(operation[1].equals("intersection")){
+					else if(operation[1].equals("intersection")){
 						//intersection
 					}
-					if(operation[1].equals("difference")){
+					else if(operation[1].equals("difference")){
 						//difference
 					}					
-				}
-				else if(operation[0].equals("translate")){
-					//translate
-				}
-				else if(operation[0].equals("rotate")){
-					//rotate
-				}
-				else if(operation[0].equals("scale")){
-					//scale
+				}else if(operation[0].equals("transform")){
+					if(operation[1].equals("translate")){
+						//translate
+					}
+					else if(operation[1].equals("rotate")){
+						//rotate
+					}
+					else if(operation[1].equals("scale")){
+						//scale
+					}
 				}
 			}
 		}

@@ -54,3 +54,4 @@ hs_err_pid*
 *.vpp.working
 *.vpp~*
 *.vux
+/bin/
