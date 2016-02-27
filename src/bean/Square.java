@@ -21,20 +21,31 @@ public class Square extends Shape {
 	}
 
 	@Override
-	public void setNoOfSides(int noOfSides) {
+	public boolean setNoOfSides(int noOfSides) {
+		return false;
 		// TODO Auto-generated method stub
 		
 	}
 
+
 	@Override
-	public void setColor(String color) {
+	public boolean setColor(String color) {
+		return false;
 		// TODO Auto-generated method stub
 		
 	}
 
+
 	@Override
-	public void setRadius(double radius) {
+	public boolean setRadius(double radius) {
 		// TODO Auto-generated method stub
-		
+		this.radius=radius;
+		return false;
+	}
+
+	@Override
+	public double getRadius() {
+		// TODO Auto-generated method stub
+		return this.radius;
 	}
 }

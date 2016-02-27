@@ -3,9 +3,8 @@ package bean;
 public class Rotate extends Transform {
 	public double angle;
 
-	public Rotate(Node inputNode, double angle){
-		this.inputNode=inputNode;
-		this.angle=angle;
+	public Rotate(Shape inputNode, double angle){
+		inputNode.setRadius(angle);
 	}
 
 	
@@ -28,6 +27,13 @@ public class Rotate extends Transform {
 	public void repeat() {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public Node getInputNode() {
+		// TODO Auto-generated method stub
+		return this.inputNode;
 	}
 
 }

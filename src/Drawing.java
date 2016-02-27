@@ -26,7 +26,11 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 
 import bean.Node;
+import bean.Rotate;
 import bean.Shape;
+import bean.Square;
+import bean.Transform;
+import bean.Translate;
 import bean.Triangle;
 import tree.TreeNode;
 
@@ -40,6 +44,10 @@ public class Drawing {
 	public static void main(String[] args) {
 		new Drawing();
 		
+		
+		Transform rorate=new Rotate(new Square(0, null, 0),50);
+		
+		Translate translate=new Translate(rorate.getInputNode(),50,50);
 
 
 	}

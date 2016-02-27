@@ -31,7 +31,11 @@ public class Scale extends Transform {
 		
 	}
 
-
+	@Override
+	public Node getInputNode() {
+		// TODO Auto-generated method stub
+		return this.inputNode;
+	}
 
 
 }

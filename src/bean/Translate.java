@@ -31,5 +31,11 @@ public class Translate extends Transform {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public Node getInputNode() {
+		// TODO Auto-generated method stub
+		return this.inputNode;
+	}
 
 }
