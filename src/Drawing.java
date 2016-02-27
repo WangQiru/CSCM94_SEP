@@ -25,6 +25,9 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 
+import bean.Node;
+import bean.Shape;
+import bean.Triangle;
 import tree.TreeNode;
 
 public class Drawing {
@@ -36,7 +39,13 @@ public class Drawing {
 
 	public static void main(String[] args) {
 		new Drawing();
+		
+
+
 	}
+	
+	
+	
 
 	private Drawing(){				
 		

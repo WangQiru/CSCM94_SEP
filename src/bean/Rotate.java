@@ -1,20 +1,18 @@
 package bean;
 
-public class Scale extends Transform {
-	public double factorX;
-	public double factorY;
+public class Rotate extends Transform {
+	public double angle;
 
-	public Scale(Node inputNode, double factorX, double factorY){
+	public Rotate(Node inputNode, double angle){
 		this.inputNode=inputNode;
-		this.factorX=factorX;
-		this.factorY=factorY;
+		this.angle=angle;
 	}
 
 	
 	@Override
 	public String getNodeType() {
 		// TODO Auto-generated method stub
-		return "Scale";
+		return "Translate";
 	}
 
 
@@ -25,13 +23,11 @@ public class Scale extends Transform {
 	}
 
 
+
 	@Override
 	public void repeat() {
 		// TODO Auto-generated method stub
 		
 	}
-
-
-
 
 }

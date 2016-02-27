@@ -1,11 +1,11 @@
 package bean;
 
-public class Triangle extends Shape{
+public class Square extends Shape {
 
-	public Triangle(double radius, String color){
+	public Square(double radius, String color, int noOfSides){
 		this.radius=radius;
 		this.color=color;
-		setNoOfSides(3);
+		setNoOfSides(4);
 	}
 	
 	@Override
@@ -17,7 +17,7 @@ public class Triangle extends Shape{
 	@Override
 	public String getNodeType() {
 		// TODO Auto-generated method stub
-		return "Triangle";
+		return "Square";
 	}
 
 	@Override
@@ -37,5 +37,4 @@ public class Triangle extends Shape{
 		// TODO Auto-generated method stub
 		
 	}
-
 }
