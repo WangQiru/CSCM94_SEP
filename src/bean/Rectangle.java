@@ -53,4 +53,19 @@ public class Rectangle extends Shape {
 		// TODO Auto-generated method stub
 		return this.radius;
 	}
+	
+
+
+	@Override
+	public void print() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void drawPixel(int x, int y) {
+		// TODO Auto-generated method stub
+		
+	}
 }

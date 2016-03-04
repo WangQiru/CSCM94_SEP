@@ -37,5 +37,20 @@ public class Translate extends Transform {
 		// TODO Auto-generated method stub
 		return this.inputNode;
 	}
+	
+
+
+	@Override
+	public void print() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void drawPixel(int x, int y) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

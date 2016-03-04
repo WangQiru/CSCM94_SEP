@@ -48,6 +48,7 @@ Temporary Items
 
 # Java
 *.class
+.classpath
 hs_err_pid*
 
 # Visual Paradigm

@@ -50,4 +50,18 @@ public class Circle extends Shape {
 		return this.radius;
 	}
 
+
+	@Override
+	public void print() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void drawPixel(int x, int y) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

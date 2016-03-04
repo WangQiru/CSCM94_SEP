@@ -1,7 +1,9 @@
+import java.awt.Graphics2D;
+import java.awt.Shape;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 
 import javax.swing.Box;
 import javax.swing.JLabel;
@@ -25,15 +27,6 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 
-import bean.Node;
-import bean.Rotate;
-import bean.Shape;
-import bean.Square;
-import bean.Transform;
-import bean.Translate;
-import bean.Triangle;
-import tree.TreeNode;
-
 public class Drawing {
 	Display display = new Display();
 	Shell shell = new Shell(display);
@@ -44,16 +37,18 @@ public class Drawing {
 	public static void main(String[] args) {
 		new Drawing();
 		
-		
-		Transform rorate=new Rotate(new Square(0, null, 0),50);
-		
-		Translate translate=new Translate(rorate.getInputNode(),50,50);
-
-
+//		Node n1=new Square(5,"blue",4);
+//		Node n2=new Square(5,"blue",4);
+//		Node n3=new Square(5,"blue",4);
+//		
+//		List<Node> nl=new ArrayList<Node>();
+//		nl.add(n1);
+//		nl.add(n2);
+//		nl.add(n3);
+//		Node union=new Union(nl);
 	}
 	
-	
-	
+
 
 	private Drawing(){				
 		
@@ -72,7 +67,7 @@ public class Drawing {
 		btnClear.addSelectionListener(new SelectionListener() {
 
 			public void widgetSelected(SelectionEvent event) {
-				canvas.redraw();
+				setToTriangle();
 			}
 
 			@Override
@@ -253,11 +248,11 @@ public class Drawing {
 	private void setToTriangle(){
 		gc.drawPolygon(new int[] {125,105,145,145,105,145});
 		
-		ArrayList<String> root=new ArrayList<String>();
-		TreeNode<List<String>> tree = new TreeNode<List<String>>(root);
-		ArrayList<String> left=new ArrayList<String>();
-		ArrayList<String> right=new ArrayList<String>();
-		tree.addChild(left);
+//		ArrayList<String> root=new ArrayList<String>();
+//		TreeNode<List<String>> tree = new TreeNode<List<String>>(root);
+//		ArrayList<String> left=new ArrayList<String>();
+//		ArrayList<String> right=new ArrayList<String>();
+//		tree.addChild(left);
 	}
 
 }
