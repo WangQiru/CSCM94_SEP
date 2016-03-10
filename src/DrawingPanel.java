@@ -46,7 +46,7 @@ public class DrawingPanel extends Panel {
 
 	
     public void paint( Graphics g ) {
-        g.setColor( Color.black );
-        g.drawRect( 0, 0, 375, 475);
+//        g.setColor( Color.black );
+//        g.drawRect( 0, 0, 375, 475);
     }
 }
