@@ -9,6 +9,12 @@ public class Scale extends Transform {
 		this.factorX=factorX;
 		this.factorY=factorY;
 	}
+	
+	public Scale(Node inputNode, double factor){
+		this.inputNode=inputNode;
+		this.factorX=factor;
+		this.factorY=factor;
+	}
 
 	
 	@Override

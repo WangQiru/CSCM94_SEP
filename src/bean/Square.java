@@ -2,7 +2,7 @@ package bean;
 
 public class Square extends Shape {
 
-	public Square(double radius, String color, int noOfSides){
+	public Square(double radius, String color){
 		this.radius=radius;
 		this.color=color;
 		setNoOfSides(4);

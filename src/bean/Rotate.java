@@ -3,8 +3,7 @@ package bean;
 public class Rotate extends Transform {
 	public double angle;
 
-	public Rotate(Shape inputNode, double angle){
-		inputNode.setRadius(angle);
+	public Rotate(Node inputNode, double angle){
 	}
 
 	
