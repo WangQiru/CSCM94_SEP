@@ -52,9 +52,8 @@ public class Triangle extends Shape{
 
 
 	@Override
-	public void print() {
-		// TODO Auto-generated method stub
-		
+	public String print() {
+		return "Triangle(" + this.radius + "," + this.color + ")";
 	}
 
 

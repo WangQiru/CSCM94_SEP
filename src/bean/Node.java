@@ -5,7 +5,7 @@ public interface Node{
 	
 	public String getNodeType();
 
-	public void print();
+	public String print();
 
 	public void drawPixel(int x, int y);
 }

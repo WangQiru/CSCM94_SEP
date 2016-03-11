@@ -38,9 +38,8 @@ public class Rotate extends Transform {
 
 
 	@Override
-	public void print() {
-		// TODO Auto-generated method stub
-		
+	public String print() {
+		return "Rotate(" + inputNode.print() + "," + this.angle + ")";
 	}
 
 

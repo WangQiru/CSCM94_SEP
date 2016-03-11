@@ -52,9 +52,8 @@ public class Square extends Shape {
 
 
 	@Override
-	public void print() {
-		// TODO Auto-generated method stub
-		
+	public String print() {
+		return "Square(" + this.radius + "," + this.color + ")";
 	}
 
 

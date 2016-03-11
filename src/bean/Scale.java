@@ -47,10 +47,15 @@ public class Scale extends Transform {
 
 
 	@Override
-	public void print() {
-		// TODO Auto-generated method stub
-		
+	public String print() {
+		if (this.factorX != this.factorY){
+			return "Scale(" + inputNode.print() + "," + this.factorX + "," + this.factorY + ")";
+		}
+		else{
+			return "Scale(" + inputNode.print() + "," + this.factorX + ")";
+		}
 	}
+
 
 
 	@Override

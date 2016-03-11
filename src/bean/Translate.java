@@ -41,9 +41,8 @@ public class Translate extends Transform {
 
 
 	@Override
-	public void print() {
-		// TODO Auto-generated method stub
-		
+	public String print() {
+		return "Translate(" + inputNode.print() + "," + this.distanceX + "," + this.distanceY + ")";
 	}
 
 

@@ -24,9 +24,12 @@ public class Difference extends Mix {
 
 
 	@Override
-	public void print() {
-		// TODO Auto-generated method stub
-		
+	public String print() {
+		String nodeList = inputNodes.get(1).print();
+		for (int i = 1; i < inputNodes.size(); ++i){
+			nodeList.concat("," + inputNodes.get(i).print());
+		}
+		return "Difference(" + nodeList + ")";
 	}
 
 

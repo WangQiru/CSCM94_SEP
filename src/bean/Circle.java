@@ -52,9 +52,8 @@ public class Circle extends Shape {
 
 
 	@Override
-	public void print() {
-		// TODO Auto-generated method stub
-		
+	public String print() {
+		return "Circle(" + this.radius + "," + this.color + ")";
 	}
 
 
