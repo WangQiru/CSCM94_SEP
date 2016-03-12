@@ -1,5 +1,8 @@
 package bean;
 
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Area;
+
 public class Translate extends Transform {
 	public double distanceX;
 	public double distanceY;
@@ -50,6 +53,15 @@ public class Translate extends Transform {
 	public void drawPixel(int x, int y) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public Area draw() {
+		AffineTransform translate = AffineTransform.getTranslateInstance(this.distanceX, this.distanceY);
+		Area translatedArea = new Area(this.inputNode.draw());
+		translatedArea.transform(translate);
+		return translatedArea;
 	}
 
 }

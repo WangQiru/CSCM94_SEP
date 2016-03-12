@@ -81,7 +81,7 @@ public class Parser {
 		}
 		
 		//Default return, should never be needed
-		return new Square(1,"BLUE");
+		return null;
 	}
 	private static List<String> getArgList(String argument){
 		ArrayList<String> argList = new ArrayList<String>();

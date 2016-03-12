@@ -1,5 +1,6 @@
 package bean;
 
+import java.awt.geom.Area;
 import java.util.List;
 
 public class Union extends Mix {
@@ -37,5 +38,15 @@ public class Union extends Mix {
 	public void drawPixel(int x, int y) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public Area draw() {
+		Area union = new Area(this.inputNodes.get(0).draw());
+		for (int i = 0; i < this.inputNodes.size(); ++i){
+			union.add(this.inputNodes.get(i).draw());
+		}
+		return union;
 	}
 }

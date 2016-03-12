@@ -1,5 +1,8 @@
 package bean;
 
+import java.awt.Polygon;
+import java.awt.geom.Area;
+
 public class Square extends Shape {
 
 	public Square(double radius, String color){
@@ -61,5 +64,13 @@ public class Square extends Shape {
 	public void drawPixel(int x, int y) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Area draw() {
+		int[] xCoords = {(int) -this.radius, (int) this.radius, (int) this.radius, (int) -this.radius};
+		int[] yCoords = {(int) this.radius, (int) this.radius, (int) -this.radius, (int) -this.radius};
+		Polygon shape = new Polygon(xCoords, yCoords, 4);
+		return new Area(shape);
 	}
 }

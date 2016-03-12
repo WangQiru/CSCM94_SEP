@@ -1,13 +1,16 @@
 package bean;
 
+import java.awt.Polygon;
+import java.awt.geom.Area;
+
 public class Rectangle extends Shape {
 	
-	public double length;
+	public double yRadius;
 	
-	public Rectangle(double height, double length, String color) {
+	public Rectangle(double radius, double yRadius, String color) {
 		super();
-		this.radius = height;
-		this.length = length;
+		this.radius = radius;
+		this.yRadius = yRadius;
 		this.color = color;
 	}
 
@@ -58,7 +61,7 @@ public class Rectangle extends Shape {
 
 	@Override
 	public String print() {
-		return "Rectangle(" + this.radius + "," + this.length + "," + this.color + ")";
+		return "Rectangle(" + this.radius + "," + this.yRadius + "," + this.color + ")";
 	}
 
 
@@ -66,5 +69,14 @@ public class Rectangle extends Shape {
 	public void drawPixel(int x, int y) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public Area draw() {
+		int[] xCoords = {(int) -this.radius, (int) this.radius, (int) this.radius, (int) -this.radius};
+		int[] yCoords = {(int) this.yRadius, (int) this.yRadius, (int) -this.yRadius, (int) -this.yRadius};
+		Polygon shape = new Polygon(xCoords, yCoords, 4);
+		return new Area(shape);
 	}
 }

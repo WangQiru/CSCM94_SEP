@@ -1,5 +1,8 @@
 package bean;
 
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Area;
+
 public class Rotate extends Transform {
 	public double angle;
 
@@ -49,6 +52,17 @@ public class Rotate extends Transform {
 	public void drawPixel(int x, int y) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public Area draw() {
+		//Might need to change to getRotateInstance(double angle, double anchorx, double anchory)
+		//to rotate about the origin of the drawing area.
+		AffineTransform rotate = AffineTransform.getRotateInstance(Math.toRadians(this.angle));
+		Area rotatedArea = new Area(this.inputNode.draw());
+		rotatedArea.transform(rotate);
+		return rotatedArea;
 	}
 
 }

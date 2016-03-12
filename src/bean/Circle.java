@@ -1,5 +1,8 @@
 package bean;
 
+import java.awt.geom.Area;
+import java.awt.geom.Ellipse2D;
+
 public class Circle extends Shape {
 	
 	public Circle(double radius, String color){
@@ -61,6 +64,13 @@ public class Circle extends Shape {
 	public void drawPixel(int x, int y) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public Area draw() {
+		Ellipse2D.Double shape = new Ellipse2D.Double(-this.radius,-this.radius,2*this.radius,2*this.radius);
+		return new Area(shape);
 	}
 
 }

@@ -1,5 +1,6 @@
 package bean;
 
+import java.awt.geom.Area;
 import java.util.List;
 
 public class Intersection extends Mix {
@@ -37,6 +38,16 @@ public class Intersection extends Mix {
 	public void drawPixel(int x, int y) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public Area draw() {
+		Area intersection = new Area(this.inputNodes.get(0).draw());
+		for (int i = 0; i < this.inputNodes.size(); ++i){
+			intersection.intersect(this.inputNodes.get(i).draw());
+		}
+		return intersection;
 	}
 
 }
