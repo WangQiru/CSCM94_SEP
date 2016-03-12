@@ -8,11 +8,11 @@ import bean.*;
 public class Parser {
 
 	public static Node parse(String input){
-		//Removing all whitespace from input string
-		String instructions = input.replaceAll(" ", "");
+		//Removing all newlines, tabs and whitespace from input string
+		String instructions = input.replaceAll("\n", "").replaceAll("\t", "").replaceAll(" ", "");
 		
 		//Creating a substring of whatever is contained within the outermost pair of brackets
-		String argument = instructions.substring(instructions.indexOf('('),instructions.lastIndexOf(')'));
+		String argument = instructions.substring(instructions.indexOf('(') + 1,instructions.lastIndexOf(')'));
 		
 		//Using getArgList to produce a list of the comma separated arguments
 		List<String> argList = getArgList(argument);
@@ -91,7 +91,7 @@ public class Parser {
 		boolean clause = false;
 		//For each character in argument, moving from the end to the beginning
 		while(pointer > 0){
-			//If an close bracket is seen and we are not currently in a clause, begin a clause and keep
+			//If a close bracket is seen and we are not currently in a clause, begin a clause and keep
 			//track of how many open and close brackets there have been
 			if (argument.charAt(pointer) == ')'){
 				clause = true;

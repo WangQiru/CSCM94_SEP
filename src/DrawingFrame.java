@@ -9,9 +9,12 @@ import java.awt.event.WindowEvent;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
+import bean.Node;
+import util.Parser;
+
 public class DrawingFrame extends Frame {
 	DrawingPanel left=new DrawingPanel();
-	CodeingPanel right=new CodeingPanel();
+	CodingPanel right=new CodingPanel();
 	public DrawingFrame(){
 		setSize(900,700);
 		setVisible(true);
@@ -96,6 +99,16 @@ public class DrawingFrame extends Frame {
 		btnSave.setLabel("Save");
 		btnSave.setBounds(680,630,80,30);
 		add(btnSave);
+		
+		Button btnHelp = new Button();
+		btnHelp.setLabel("Help");
+		btnHelp.setBounds(680,530,80,30);
+		add(btnHelp);
+		btnHelp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0){
+				HelpFrame help = new HelpFrame();
+			}
+		});
 
 		addWindowListener(new WindowAdapter()
 		{
@@ -104,6 +117,7 @@ public class DrawingFrame extends Frame {
 		}
 				);
 	}
+	
 
 	public static void main(String args[])
 	{

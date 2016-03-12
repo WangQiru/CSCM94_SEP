@@ -49,10 +49,10 @@ public class Scale extends Transform {
 	@Override
 	public String print() {
 		if (this.factorX != this.factorY){
-			return "Scale(" + inputNode.print() + "," + this.factorX + "," + this.factorY + ")";
+			return "Scale(" + this.inputNode.print() + "," + this.factorX + "," + this.factorY + ")";
 		}
 		else{
-			return "Scale(" + inputNode.print() + "," + this.factorX + ")";
+			return "Scale(" + this.inputNode.print() + "," + this.factorX + ")";
 		}
 	}
 

@@ -42,7 +42,7 @@ public class Translate extends Transform {
 
 	@Override
 	public String print() {
-		return "Translate(" + inputNode.print() + "," + this.distanceX + "," + this.distanceY + ")";
+		return "Translate(" + this.inputNode.print() + "," + this.distanceX + "," + this.distanceY + ")";
 	}
 
 

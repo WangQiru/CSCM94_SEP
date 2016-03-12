@@ -4,6 +4,8 @@ public class Rotate extends Transform {
 	public double angle;
 
 	public Rotate(Node inputNode, double angle){
+		this.inputNode = inputNode;
+		this.angle = angle;
 	}
 
 	
@@ -39,7 +41,7 @@ public class Rotate extends Transform {
 
 	@Override
 	public String print() {
-		return "Rotate(" + inputNode.print() + "," + this.angle + ")";
+		return "Rotate(" + this.inputNode.print() + "," + this.angle + ")";
 	}
 
 

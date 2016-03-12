@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Difference extends Mix {
 	public Difference(List<Node> inputNodes){
-		// Difference implementation here
+		this.inputNodes = inputNodes;
 	}
 
 
@@ -25,9 +25,9 @@ public class Difference extends Mix {
 
 	@Override
 	public String print() {
-		String nodeList = inputNodes.get(1).print();
+		String nodeList = inputNodes.get(0).print();
 		for (int i = 1; i < inputNodes.size(); ++i){
-			nodeList.concat("," + inputNodes.get(i).print());
+			nodeList = nodeList.concat("," + inputNodes.get(i).print());
 		}
 		return "Difference(" + nodeList + ")";
 	}

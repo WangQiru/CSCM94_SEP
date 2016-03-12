@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Union extends Mix {
 	public Union(List<Node> inputNodes){
-		// Union implementation here
+		this.inputNodes = inputNodes;
 	}
 
 
@@ -25,9 +25,9 @@ public class Union extends Mix {
 
 	@Override
 	public String print() {
-		String nodeList = inputNodes.get(1).print();
-		for (int i = 1; i < inputNodes.size(); ++i){
-			nodeList.concat("," + inputNodes.get(i).print());
+		String nodeList = this.inputNodes.get(0).print();
+		for (int i = 1; i < this.inputNodes.size(); ++i){
+			nodeList = nodeList.concat("," + this.inputNodes.get(i).print());
 		}
 		return "Union(" + nodeList + ")";
 	}
