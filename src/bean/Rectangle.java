@@ -22,21 +22,6 @@ public class Rectangle extends Shape {
 	}
 
 	@Override
-	public String getNodeType() {
-		// TODO Auto-generated method stub
-		return "Rectangle";
-	}
-
-
-	@Override
-	public boolean setNoOfSides(int noOfSides) {
-		return false;
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
 	public boolean setColor(String color) {
 		return false;
 		// TODO Auto-generated method stub

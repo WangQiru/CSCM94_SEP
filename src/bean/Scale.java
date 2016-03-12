@@ -21,13 +21,6 @@ public class Scale extends Transform {
 
 	
 	@Override
-	public String getNodeType() {
-		// TODO Auto-generated method stub
-		return "Scale";
-	}
-
-
-	@Override
 	public boolean deleteNode() {
 		// TODO Auto-generated method stub
 		return false;

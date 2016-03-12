@@ -9,7 +9,7 @@ public class Parser {
 
 	public static Node parse(String input){
 		//Removing all newlines, tabs and whitespace from input string
-		String instructions = input.replaceAll("\n", "").replaceAll("\t", "").replaceAll(" ", "");
+		String instructions = input.replaceAll("\n", "").replaceAll("\t", "").replaceAll(" ", "").replaceAll("\r", "");
 		
 		//Creating a substring of whatever is contained within the outermost pair of brackets
 		String argument = instructions.substring(instructions.indexOf('(') + 1,instructions.lastIndexOf(')'));

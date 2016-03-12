@@ -10,13 +10,6 @@ public class Union extends Mix {
 
 
 	@Override
-	public String getNodeType() {
-		// TODO Auto-generated method stub
-		return "Union";
-	}
-
-
-	@Override
 	public boolean deleteNode() {
 		// TODO Auto-generated method stub
 		return false;

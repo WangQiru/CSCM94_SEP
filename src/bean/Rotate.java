@@ -13,13 +13,6 @@ public class Rotate extends Transform {
 
 	
 	@Override
-	public String getNodeType() {
-		// TODO Auto-generated method stub
-		return "Translate";
-	}
-
-
-	@Override
 	public boolean deleteNode() {
 		// TODO Auto-generated method stub
 		return false;

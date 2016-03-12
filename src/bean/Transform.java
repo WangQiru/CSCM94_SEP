@@ -10,10 +10,4 @@ public abstract class Transform implements Node {
 	
 	public abstract Node getInputNode();
 
-	@Override
-	public String getNodeType() {
-		// TODO Auto-generated method stub
-		return "Transform";
-	}
-
 }

@@ -17,20 +17,6 @@ public class Circle extends Shape {
 		return false;
 	}
 
-	@Override
-	public String getNodeType() {
-		// TODO Auto-generated method stub
-		return "Circle";
-	}
-
-
-	@Override
-	public boolean setNoOfSides(int noOfSides) {
-		return false;
-		// TODO Auto-generated method stub
-		
-	}
-
 
 	@Override
 	public boolean setColor(String color) {

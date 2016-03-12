@@ -10,13 +10,6 @@ public class Difference extends Mix {
 
 
 	@Override
-	public String getNodeType() {
-		// TODO Auto-generated method stub
-		return "Difference";
-	}
-
-
-	@Override
 	public boolean deleteNode() {
 		// TODO Auto-generated method stub
 		return false;

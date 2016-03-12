@@ -8,7 +8,6 @@ public class Square extends Shape {
 	public Square(double radius, String color){
 		this.radius=radius;
 		this.color=color;
-		setNoOfSides(4);
 	}
 	
 	@Override
@@ -17,20 +16,6 @@ public class Square extends Shape {
 		return false;
 	}
 	
-	@Override
-	public String getNodeType() {
-		// TODO Auto-generated method stub
-		return "Square";
-	}
-
-	@Override
-	public boolean setNoOfSides(int noOfSides) {
-		return false;
-		// TODO Auto-generated method stub
-		
-	}
-
-
 	@Override
 	public boolean setColor(String color) {
 		return false;

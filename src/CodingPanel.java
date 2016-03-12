@@ -7,8 +7,6 @@ public class CodingPanel extends Panel {
 	
 	public CodingPanel(){
 		setLayout(null);
-		setBounds(50, 50, 380, 480);
-		textArea.setBounds(30,30,350,330);
 		add(textArea);
 	}
 	

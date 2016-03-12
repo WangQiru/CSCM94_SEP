@@ -10,13 +10,6 @@ public class Intersection extends Mix {
 
 
 	@Override
-	public String getNodeType() {
-		// TODO Auto-generated method stub
-		return "Intersection";
-	}
-
-
-	@Override
 	public boolean deleteNode() {
 		// TODO Auto-generated method stub
 		return false;
