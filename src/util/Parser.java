@@ -2,8 +2,19 @@ package util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
-import bean.*;
+import bean.Circle;
+import bean.Difference;
+import bean.Intersection;
+import bean.Node;
+import bean.Rectangle;
+import bean.Rotate;
+import bean.Scale;
+import bean.Square;
+import bean.Translate;
+import bean.Triangle;
+import bean.Union;
 
 public class Parser {
 
@@ -122,5 +133,29 @@ public class Parser {
 		
 		
 		return argList;
+	}
+	
+	
+	public static boolean check(String str){
+		Stack<Character> stack = new Stack<Character>(); 
+		for (int i = 0; i < str.length(); i++)
+		{
+			char current = str.charAt(i);
+			 if (current == '{' || current == '(' || current == '[')
+		        {
+		            stack.push(current);
+		        }
+		        if (current == '}' || current == ')' || current == ']')
+		        {
+		            if (stack.isEmpty())
+		                return false;
+		            char last = stack.peek();
+		            if (current == '}' && last == '{' || current == ')' && last == '(' || current == ']' && last == '[')
+		                stack.pop();
+		            else 
+		                return false;
+		        }
+		}
+		return stack.isEmpty();
 	}
 }
