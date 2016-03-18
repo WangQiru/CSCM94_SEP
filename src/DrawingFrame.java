@@ -67,8 +67,8 @@ public class DrawingFrame extends Frame {
 		});
 		
 		Button btnDrawPixel = new Button();
-		btnDrawPixel.setLabel("Draw Pixels");
-		btnDrawPixel.setBounds(spacingX, canvas.getY() + canvas.getHeight() + 2*spacingY + buttonY, buttonX, buttonY);
+		btnDrawPixel.setLabel("Draw");
+		btnDrawPixel.setBounds(canvas.getWidth() + canvas.getX() - buttonX, canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
 		add(btnDrawPixel);
 		btnDrawPixel.addActionListener(new ActionListener() {
 			@Override
@@ -94,22 +94,22 @@ public class DrawingFrame extends Frame {
 			}
 		});
 
-		Button btnDraw = new Button();
-		btnDraw.setLabel("Draw");
-		btnDraw.setBounds(canvas.getWidth() + canvas.getX() - buttonX, canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
-		add(btnDraw);
-		btnDraw.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Node rootNode = Parser.parse(textBox.getText());
-				if (rootNode == null){
-					canvas.drawError("Syntax Error"); 
-				}
-				else {
-					canvas.drawArea(rootNode.draw());
-				}
-			}
-		});
+//		Button btnDraw = new Button();
+//		btnDraw.setLabel("Draw");
+//		btnDraw.setBounds(canvas.getWidth() + canvas.getX() - buttonX, canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
+//		add(btnDraw);
+//		btnDraw.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				Node rootNode = Parser.parse(textBox.getText());
+//				if (rootNode == null){
+//					canvas.drawError("Syntax Error"); 
+//				}
+//				else {
+//					canvas.drawArea(rootNode.draw());
+//				}
+//			}
+//		});
 
 		Button btnSave = new Button();
 		btnSave.setLabel("Save");
@@ -175,10 +175,10 @@ public class DrawingFrame extends Frame {
 				textBox.setBounds(canvas.getWidth() + canvas.getX() + spacingX, canvas.getY(), canvas.getWidth(), canvas.getHeight());
 				textBox.textArea.setBounds(10, 10, textBox.getWidth() - 10, textBox.getHeight() - 10);
 				btnClear.setBounds(spacingX, canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
-				btnDraw.setBounds(canvas.getWidth() + canvas.getX() - buttonX, canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
+//				btnDraw.setBounds(canvas.getWidth() + canvas.getX() - buttonX, canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
 				btnLoad.setBounds(2*canvas.getWidth() + canvas.getX() + spacingX - buttonX, canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
 				btnSave.setBounds(2*spacingX + canvas.getWidth(), canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
-				btnDrawPixel.setBounds(spacingX, canvas.getY() + canvas.getHeight() + 2*spacingY + buttonY, buttonX, buttonY);
+				btnDrawPixel.setBounds(canvas.getWidth() + canvas.getX() - buttonX, canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
 				btnHelp.setBounds(2*canvas.getWidth() + canvas.getX() + spacingX - buttonX, canvas.getY() + canvas.getHeight() + 2*spacingY + buttonY, buttonX, buttonY);
 			}
 		});
