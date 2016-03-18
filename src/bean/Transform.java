@@ -6,8 +6,6 @@ public abstract class Transform implements Node {
 
 	public int repeat;
 	
-	public abstract void repeat();
-	
 	public abstract Node getInputNode();
 
 }

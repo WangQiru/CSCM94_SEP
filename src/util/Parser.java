@@ -2,7 +2,6 @@ package util;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 import bean.Circle;
 import bean.Difference;
@@ -21,76 +20,93 @@ public class Parser {
 	public static Node parse(String input){
 		//Removing all newlines, tabs and whitespace from input string
 		String instructions = input.replaceAll("\n", "").replaceAll("\t", "").replaceAll(" ", "").replaceAll("\r", "");
-		
-		//Creating a substring of whatever is contained within the outermost pair of brackets
-		String argument = instructions.substring(instructions.indexOf('(') + 1,instructions.lastIndexOf(')'));
-		
-		//Using getArgList to produce a list of the comma separated arguments
-		List<String> argList = getArgList(argument);
-		
-		//Recursively creating the required nodes
-		//SHAPES
-		if (instructions.startsWith("Square")){
-			return new Square(Double.parseDouble(argList.get(0)),argList.get(1));
-		}
-		
-		else if (instructions.startsWith("Rectangle")){
-			return new Rectangle(Double.parseDouble(argList.get(0)), Double.parseDouble(argList.get(1)), argList.get(2));
-		}
-		
-		else if (instructions.startsWith("Triangle")){
-			return new Triangle(Double.parseDouble(argList.get(0)),argList.get(1));
-		}
-		
-		else if (instructions.startsWith("Circle")){
-			return new Circle(Double.parseDouble(argList.get(0)),argList.get(1));
-		}
-		
-		//TRANSFORMS
-		else if (instructions.startsWith("Rotate")){
-			return new Rotate(parse(argList.get(0)),Double.parseDouble(argList.get(1)));
-		}
-		
-		else if (instructions.startsWith("Translate")){
-			return new Translate(parse(argList.get(0)),Double.parseDouble(argList.get(1)), Double.parseDouble(argList.get(2)));
-		}
-		
-		else if (instructions.startsWith("Scale")){
-			//Two different calls for Scale because there are two different Scale functions (uniform and non-uniform)
-			if (argList.size() == 2){
-				return new Scale(parse(argList.get(0)),Double.parseDouble(argList.get(1)));
+		try {
+			//Creating a substring of whatever is contained within the outermost pair of brackets
+			String argument = instructions.substring(instructions.indexOf('(') + 1,instructions.lastIndexOf(')'));
+			
+			//Using getArgList to produce a list of the comma separated arguments
+			List<String> argList = getArgList(argument);
+			
+			//Recursively creating the required nodes
+			//SHAPES
+			if (instructions.startsWith("Square")){
+				return new Square(Double.parseDouble(argList.get(0)));
 			}
-			else{
-				return new Scale(parse(argList.get(0)),Double.parseDouble(argList.get(1)), Double.parseDouble(argList.get(2)));
+			
+			else if (instructions.startsWith("Rectangle")){
+				return new Rectangle(Double.parseDouble(argList.get(0)), Double.parseDouble(argList.get(1)));
 			}
-		}
-		
-		//MIXES
-		//Mix nodes take a List of Nodes as their input, so generate a List by parsing each
-		//element of argsList into a Node
-		else if (instructions.startsWith("Union")){
-			List<Node> mixNodes = new ArrayList<Node>();
-			for (int i = 0; i < argList.size(); ++i){
-				mixNodes.add(parse(argList.get(i)));
+			
+			else if (instructions.startsWith("Triangle")){
+				return new Triangle(Double.parseDouble(argList.get(0)));
 			}
-			return new Union(mixNodes);
+			
+			else if (instructions.startsWith("Circle")){
+				return new Circle(Double.parseDouble(argList.get(0)));
 			}
-		
-		else if (instructions.startsWith("Intersection")){
-			List<Node> mixNodes = new ArrayList<Node>();
-			for (int i = 0; i < argList.size(); ++i){
-				mixNodes.add(parse(argList.get(i)));
+			
+			//TRANSFORMS
+			else if (instructions.startsWith("RotateN")){
+				return new Rotate(parse(argList.get(0)),Double.parseDouble(argList.get(1)),Integer.parseInt(argList.get(2)));
 			}
-			return new Intersection(mixNodes);		}
-		
-		else if (instructions.startsWith("Difference")){
-			List<Node> mixNodes = new ArrayList<Node>();
-			for (int i = 0; i < argList.size(); ++i){
-				mixNodes.add(parse(argList.get(i)));
+			
+			else if (instructions.startsWith("Rotate")){
+				return new Rotate(parse(argList.get(0)),Double.parseDouble(argList.get(1)));
 			}
-			return new Difference(mixNodes);
-		}
-		
+			
+			else if (instructions.startsWith("TranslateN")){
+				return new Translate(parse(argList.get(0)),Double.parseDouble(argList.get(1)), Double.parseDouble(argList.get(2)),Integer.parseInt(argList.get(3)));
+			}
+			
+			else if (instructions.startsWith("Translate")){
+				return new Translate(parse(argList.get(0)),Double.parseDouble(argList.get(1)), Double.parseDouble(argList.get(2)));
+			}
+			
+			else if (instructions.startsWith("ScaleN")){
+				//Two different calls for Scale because there are two different Scale functions (uniform and non-uniform)
+				if (argList.size() == 3){
+					return new Scale(parse(argList.get(0)),Double.parseDouble(argList.get(1)), Double.parseDouble(argList.get(1)),Integer.parseInt(argList.get(2)));
+				}
+				else{
+					return new Scale(parse(argList.get(0)),Double.parseDouble(argList.get(1)), Double.parseDouble(argList.get(2)),Integer.parseInt(argList.get(3)));
+				}
+			}
+			
+			else if (instructions.startsWith("Scale")){
+				if (argList.size() == 3){
+					return new Scale(parse(argList.get(0)),Double.parseDouble(argList.get(1)), Double.parseDouble(argList.get(1)));
+				}
+				else{
+					return new Scale(parse(argList.get(0)),Double.parseDouble(argList.get(1)), Double.parseDouble(argList.get(2)));
+				}
+			}
+			
+			//MIXES
+			//Mix nodes take a List of Nodes as their input, so generate a List by parsing each
+			//element of argsList into a Node
+			else if (instructions.startsWith("Union")){
+				List<Node> mixNodes = new ArrayList<Node>();
+				for (int i = 0; i < argList.size(); ++i){
+					mixNodes.add(parse(argList.get(i)));
+				}
+				return new Union(mixNodes);
+				}
+			
+			else if (instructions.startsWith("Intersection")){
+				List<Node> mixNodes = new ArrayList<Node>();
+				for (int i = 0; i < argList.size(); ++i){
+					mixNodes.add(parse(argList.get(i)));
+				}
+				return new Intersection(mixNodes);		}
+			
+			else if (instructions.startsWith("Difference")){
+				List<Node> mixNodes = new ArrayList<Node>();
+				for (int i = 0; i < argList.size(); ++i){
+					mixNodes.add(parse(argList.get(i)));
+				}
+				return new Difference(mixNodes);
+			}
+		} catch (Exception e) {}
 		//Default return, should never be needed
 		return null;
 	}
@@ -137,25 +153,26 @@ public class Parser {
 	
 	
 	public static boolean check(String str){
-		Stack<Character> stack = new Stack<Character>(); 
+		if (str.trim().length() == 0){
+			return false;
+		}
+		int brackets = 0;
 		for (int i = 0; i < str.length(); i++)
 		{
 			char current = str.charAt(i);
-			 if (current == '{' || current == '(' || current == '[')
-		        {
-		            stack.push(current);
-		        }
-		        if (current == '}' || current == ')' || current == ']')
-		        {
-		            if (stack.isEmpty())
-		                return false;
-		            char last = stack.peek();
-		            if (current == '}' && last == '{' || current == ')' && last == '(' || current == ']' && last == '[')
-		                stack.pop();
-		            else 
-		                return false;
-		        }
+			 if (current == '('){
+				 ++brackets;
+			 }
+			 if (current == ')'){
+				 --brackets;
+			 }
+			 if (brackets < 0){
+				 return false;
+			 }
 		}
-		return stack.isEmpty();
+		if (brackets != 0){
+			return false;
+		}
+		return true;
 	}
 }

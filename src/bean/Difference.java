@@ -28,9 +28,12 @@ public class Difference extends Mix {
 
 
 	@Override
-	public void drawPixel(int x, int y) {
-		// TODO Auto-generated method stub
-		
+	public boolean drawPixel(double x, double y) {
+		boolean subtractedNodes = false;
+		for (int i = 1; i < this.inputNodes.size(); ++i){
+			subtractedNodes = this.inputNodes.get(i).drawPixel(x, y);
+		}
+		return (this.inputNodes.get(0).drawPixel(x, y) && !subtractedNodes);
 	}
 
 

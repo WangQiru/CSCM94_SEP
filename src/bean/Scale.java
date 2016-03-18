@@ -11,12 +11,14 @@ public class Scale extends Transform {
 		this.inputNode=inputNode;
 		this.factorX=factorX;
 		this.factorY=factorY;
+		this.repeat = 1;
 	}
-	
-	public Scale(Node inputNode, double factor){
+
+	public Scale(Node inputNode, double factorX, double factorY, int repeat){
 		this.inputNode=inputNode;
-		this.factorX=factor;
-		this.factorY=factor;
+		this.factorX=factorX;
+		this.factorY=factorY;
+		this.repeat = repeat;
 	}
 
 	
@@ -26,38 +28,31 @@ public class Scale extends Transform {
 		return false;
 	}
 
-
-	@Override
-	public void repeat() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	@Override
 	public Node getInputNode() {
-		// TODO Auto-generated method stub
 		return this.inputNode;
 	}
 
-	
-
-
 	@Override
 	public String print() {
+		String output = "Scale(" + this.inputNode.print() + "," + this.factorX;
 		if (this.factorX != this.factorY){
-			return "Scale(" + this.inputNode.print() + "," + this.factorX + "," + this.factorY + ")";
+			output.concat("," + this.factorY);
 		}
-		else{
-			return "Scale(" + this.inputNode.print() + "," + this.factorX + ")";
+		if (this.repeat != 1){
+			output.concat("," + this.repeat);
+			output.replaceFirst("Scale", "ScaleN");
 		}
+		return output.concat(")");
 	}
 
-
-
 	@Override
-	public void drawPixel(int x, int y) {
-		// TODO Auto-generated method stub
-		
+	public boolean drawPixel(double x, double y) {
+		boolean inShape = false;
+		for (int i = 0; i < this.repeat; ++i){
+			inShape = inShape || (this.inputNode.drawPixel(x/Math.pow(this.factorX,i+1), y/Math.pow(this.factorY,i+1)));
+		}
+		return inShape;
 	}
 
 	@Override

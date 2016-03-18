@@ -16,6 +16,7 @@ import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+@SuppressWarnings("serial")
 public class ImportFile extends JPanel
 implements ActionListener {
 	static private final String newline = "\n";
@@ -48,14 +49,12 @@ implements ActionListener {
 
 		//Create the open button.  We use the image from the JLF
 		//Graphics Repository (but we extracted it from the jar).
-		openButton = new JButton("Open a File...",
-				createImageIcon("images/Open16.gif"));
+		openButton = new JButton("Open a File...");
 		openButton.addActionListener(this);
 
 		//Create the save button.  We use the image from the JLF
 		//Graphics Repository (but we extracted it from the jar).
-		saveButton = new JButton("Save a File...",
-				createImageIcon("images/Save16.gif"));
+		saveButton = new JButton("Save a File...");
 		saveButton.addActionListener(this);
 
 		//For layout purposes, put the buttons in a separate panel

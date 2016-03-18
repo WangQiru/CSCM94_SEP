@@ -9,5 +9,5 @@ public interface Node{
 	
 	public Area draw();
 
-	public void drawPixel(int x, int y);
+	public boolean drawPixel(double x, double y);
 }

@@ -7,11 +7,10 @@ public class Rectangle extends Shape {
 	
 	public double yRadius;
 	
-	public Rectangle(double radius, double yRadius, String color) {
+	public Rectangle(double radius, double yRadius) {
 		super();
 		this.radius = radius;
 		this.yRadius = yRadius;
-		this.color = color;
 	}
 
 
@@ -21,38 +20,31 @@ public class Rectangle extends Shape {
 		return false;
 	}
 
-	@Override
-	public boolean setColor(String color) {
-		return false;
-		// TODO Auto-generated method stub
-		
-	}
-
 
 	@Override
 	public boolean setRadius(double radius) {
-		// TODO Auto-generated method stub
 		this.radius=radius;
 		return false;
 	}
 
 	@Override
 	public double getRadius() {
-		// TODO Auto-generated method stub
 		return this.radius;
 	}
 	
 
-
 	@Override
 	public String print() {
-		return "Rectangle(" + this.radius + "," + this.yRadius + "," + this.color + ")";
+		return "Rectangle(" + this.radius + "," + this.yRadius + ")";
 	}
 
 
 	@Override
-	public void drawPixel(int x, int y) {
-		// TODO Auto-generated method stub
+	public boolean drawPixel(double x, double y) {
+		if (x >= -this.radius && x < this.radius && y >= -this.yRadius && y < this.yRadius){
+			return true;
+		}
+		return false;
 		
 	}
 

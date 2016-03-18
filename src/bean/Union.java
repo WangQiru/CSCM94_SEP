@@ -28,9 +28,12 @@ public class Union extends Mix {
 
 
 	@Override
-	public void drawPixel(int x, int y) {
-		// TODO Auto-generated method stub
-		
+	public boolean drawPixel(double x, double y) {
+		boolean unionNodes = false;
+		for (int i = 0; i < this.inputNodes.size(); ++i){
+			unionNodes = unionNodes || this.inputNodes.get(i).drawPixel(x, y);
+		}
+		return unionNodes;
 	}
 
 
