@@ -1,7 +1,5 @@
 import java.awt.Panel;
 import java.awt.TextArea;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 @SuppressWarnings("serial")
 public class CodingPanel extends Panel {
