@@ -16,13 +16,6 @@ public class DrawingPanel extends Panel {
 		Graphics2D canvasGraphics = (Graphics2D)this.getGraphics();
 		
 		if (finalArea == null){
-			canvasGraphics.clearRect(0, 0, getWidth(), getHeight());
-		    Font font = new Font("Courier", Font.PLAIN, 40);		
-			canvasGraphics.setColor(Color.red);
-		    canvasGraphics.setFont(font);
-			canvasGraphics.drawString("Syntax Error", 0, this.getHeight()/2);
-			paint(canvasGraphics);
-			return;
 		}
 		
 		//Drawing the axes
@@ -57,5 +50,17 @@ public class DrawingPanel extends Panel {
 		pixelGraphics.setColor(Color.blue);
 		pixelGraphics.drawImage(pixelCanvas, null, null);
 		paint(pixelGraphics);
+	}
+	
+	public void drawError(String error){
+		Graphics2D errorGraphics = (Graphics2D)this.getGraphics();
+		errorGraphics.clearRect(0, 0, getWidth(), getHeight());
+	    Font font = new Font("Courier", Font.PLAIN, 40);		
+	    errorGraphics.setColor(Color.red);
+	    errorGraphics.setFont(font);
+	    errorGraphics.drawString(error, 0, this.getHeight()/2);
+		paint(errorGraphics);
+		return;
+		
 	}
 }

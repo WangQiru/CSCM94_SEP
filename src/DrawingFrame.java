@@ -8,6 +8,13 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.PrintWriter;
+
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import bean.Node;
 import util.Parser;
@@ -96,7 +103,7 @@ public class DrawingFrame extends Frame {
 			public void actionPerformed(ActionEvent e) {
 				Node rootNode = Parser.parse(textBox.getText());
 				if (rootNode == null){
-					canvas.drawArea(null); 
+					canvas.drawError("Syntax Error"); 
 				}
 				else {
 					canvas.drawArea(rootNode.draw());
@@ -110,7 +117,19 @@ public class DrawingFrame extends Frame {
 		add(btnSave);
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO: Print text box contents to file
+				JFileChooser fileChooser = new JFileChooser();
+				fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
+				int result = fileChooser.showSaveDialog(canvas.getParent());
+				if (result == JFileChooser.APPROVE_OPTION) {
+				    File savedFile = fileChooser.getSelectedFile();
+				    try{
+				    	PrintWriter out = new PrintWriter(savedFile);
+				    	out.println(Parser.parse(textBox.getText()).print());
+				    	out.close();
+				    } catch(Exception ex){
+						canvas.drawError("File Save Error"); 
+				    }
+				}
 			}
 		});
 
@@ -120,7 +139,21 @@ public class DrawingFrame extends Frame {
 		add(btnLoad);
 		btnLoad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//TODO: Load text file, print it to text box
+				JFileChooser fileChooser = new JFileChooser();
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
+				fileChooser.setFileFilter(filter);
+				fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
+				int result = fileChooser.showOpenDialog(canvas.getParent());
+				if (result == JFileChooser.APPROVE_OPTION) {
+				    File selectedFile = fileChooser.getSelectedFile();
+				    try{
+				    	BufferedReader fileReader = new BufferedReader(new FileReader(selectedFile));
+				    	textBox.setText(fileReader.readLine());
+					    fileReader.close();
+				    } catch(Exception ex){
+						canvas.drawError("File Read Error"); 
+				    }
+				}
 			}
 		});
 
