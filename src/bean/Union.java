@@ -1,10 +1,10 @@
 package bean;
 
 import java.awt.geom.Area;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Union extends Mix {
-	public Union(List<Node> inputNodes){
+	public Union(ArrayList<Node> inputNodes){
 		this.inputNodes = inputNodes;
 	}
 

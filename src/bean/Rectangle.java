@@ -8,7 +8,6 @@ public class Rectangle extends Shape {
 	public double yRadius;
 	
 	public Rectangle(double radius, double yRadius) {
-		super();
 		this.radius = radius;
 		this.yRadius = yRadius;
 	}

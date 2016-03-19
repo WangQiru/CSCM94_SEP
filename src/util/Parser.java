@@ -1,9 +1,9 @@
 package util;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import bean.Circle;
+import bean.ClosedCurve;
 import bean.Difference;
 import bean.Intersection;
 import bean.Node;
@@ -21,11 +21,9 @@ public class Parser {
 		//Removing all newlines, tabs and whitespace from input string
 		String instructions = input.replaceAll("\n", "").replaceAll("\t", "").replaceAll(" ", "").replaceAll("\r", "");
 		try {
-			//Creating a substring of whatever is contained within the outermost pair of brackets
-			String argument = instructions.substring(instructions.indexOf('(') + 1,instructions.lastIndexOf(')'));
 			
 			//Using getArgList to produce a list of the comma separated arguments
-			List<String> argList = getArgList(argument);
+			ArrayList<String> argList = getArgList(instructions);
 			
 			//Recursively creating the required nodes
 			//SHAPES
@@ -43,6 +41,38 @@ public class Parser {
 			
 			else if (instructions.startsWith("Circle")){
 				return new Circle(Double.parseDouble(argList.get(0)));
+			}
+			
+			//A curve segment is defined by 4 points, each with an x and y value (8 values total)
+			//A closed curve is a sequence of one or more curves
+			else if (instructions.startsWith("ClosedCurve")){
+				
+				//Create an empty list of curve segment coordinates
+				ArrayList<double[]> curveSegmentList = new ArrayList<double[]>();
+				
+				//If this closed curve consists of more than one curve segment, add each of them to the list 
+				if (argList.get(0).startsWith("(")){
+					for (int i = 0; i < argList.size(); ++i){
+						
+						//Taking the current curve segment string and converting it to a double array
+						ArrayList<String> argList2 = getArgList(argList.get(i));
+						double[] curvePoints = new double[argList2.size()];
+						for (int j = 0; j < argList2.size(); ++j){
+							curvePoints[j] = Double.parseDouble(argList2.get(j));
+						}
+						//Adding the current curve segment to the list
+						curveSegmentList.add(curvePoints);
+					}
+				}
+				//If the closed curve consists of only one curve segment, add it to the list
+				else{
+					double[] curvePoints = new double[argList.size()];
+					for (int i = 0; i < argList.size(); ++i){
+						curvePoints[i] = Double.parseDouble(argList.get(i));
+					}
+					curveSegmentList.add(curvePoints);
+				}
+				return new ClosedCurve(curveSegmentList);
 			}
 			
 			//TRANSFORMS
@@ -86,7 +116,7 @@ public class Parser {
 			//Mix nodes take a List of Nodes as their input, so generate a List by parsing each
 			//element of argsList into a Node
 			else if (instructions.startsWith("Union")){
-				List<Node> mixNodes = new ArrayList<Node>();
+				ArrayList<Node> mixNodes = new ArrayList<Node>();
 				for (int i = 0; i < argList.size(); ++i){
 					mixNodes.add(parse(argList.get(i)));
 				}
@@ -94,14 +124,14 @@ public class Parser {
 				}
 			
 			else if (instructions.startsWith("Intersection")){
-				List<Node> mixNodes = new ArrayList<Node>();
+				ArrayList<Node> mixNodes = new ArrayList<Node>();
 				for (int i = 0; i < argList.size(); ++i){
 					mixNodes.add(parse(argList.get(i)));
 				}
 				return new Intersection(mixNodes);		}
 			
 			else if (instructions.startsWith("Difference")){
-				List<Node> mixNodes = new ArrayList<Node>();
+				ArrayList<Node> mixNodes = new ArrayList<Node>();
 				for (int i = 0; i < argList.size(); ++i){
 					mixNodes.add(parse(argList.get(i)));
 				}
@@ -111,12 +141,17 @@ public class Parser {
 		//Default return, should never be needed
 		return null;
 	}
-	private static List<String> getArgList(String argument){
+	private static ArrayList<String> getArgList(String instructions){
 		ArrayList<String> argList = new ArrayList<String>();
+		
+		//Creating a substring of whatever is contained within the outermost pair of brackets
+		String argument = instructions.substring(instructions.indexOf('(') + 1,instructions.lastIndexOf(')'));
 		int endIndex = argument.length() - 1;
 		int pointer = argument.length() - 1;
 		int brackets = 0;
 		boolean clause = false;
+		
+		
 		//For each character in argument, moving from the end to the beginning
 		while(pointer > 0){
 			//If a close bracket is seen and we are not currently in a clause, begin a clause and keep

@@ -1,9 +1,9 @@
 package bean;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public abstract class Mix implements Node {
 	
-	public List<Node> inputNodes;
+	public ArrayList<Node> inputNodes;
 
 }

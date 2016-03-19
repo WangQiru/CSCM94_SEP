@@ -1,10 +1,10 @@
 package bean;
 
 import java.awt.geom.Area;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Difference extends Mix {
-	public Difference(List<Node> inputNodes){
+	public Difference(ArrayList<Node> inputNodes){
 		this.inputNodes = inputNodes;
 	}
 

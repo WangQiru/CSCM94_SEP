@@ -1,10 +1,10 @@
 package bean;
 
 import java.awt.geom.Area;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Intersection extends Mix {
-	public Intersection(List<Node> inputNodes){
+	public Intersection(ArrayList<Node> inputNodes){
 		this.inputNodes = inputNodes;
 	}
 

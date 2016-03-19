@@ -11,7 +11,7 @@ import java.awt.event.WindowEvent;
 @SuppressWarnings("serial")
 public class HelpFrame extends Frame {
 	public HelpFrame(){
-		setSize(480,510);
+		setSize(520,535);
 		setVisible(true);
 		setLayout(null);
 		setResizable(false);
@@ -21,12 +21,14 @@ public class HelpFrame extends Frame {
 		int buttonX = 80;
 		int buttonY = 30;
 		
-		String helpText = "Syntax for inputting instructions:\n"
+		String helpText = "Syntax for inputting instructions:\n \n"
 				+ "SHAPES\n"
 				+ "Square(radius)\n"
 				+ "Rectangle(X radius, Y radius)\n"
 				+ "Circle(radius)\n"
-				+ "Triangle(radius)\n \n"
+				+ "Triangle(radius)\n"
+				+ "ClosedCurve(curve segment 1,...) \n"
+				+ "Curve segments are Bezier curves defined as: (x1, y1, x2, y2, x3, y3, x4, y4) \n \n"
 				+ "TRANSFORMS\n"
 				+ "Rotate(Node, angle) - Rotation is anticlockwise\n"
 				+ "Translate(Node, X distance, Y distance)\n"

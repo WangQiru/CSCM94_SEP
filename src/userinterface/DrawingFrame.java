@@ -105,22 +105,22 @@ public class DrawingFrame extends Frame {
 		});
 
 		//Button for drawing using the Area class
-//		Button btnDraw = new Button();
-//		btnDraw.setLabel("Draw");
-//		btnDraw.setBounds(canvas.getWidth() + canvas.getX() - buttonX, canvas.getY() + canvas.getHeight() + 2*spacingY + buttonY, buttonX, buttonY);
-//		add(btnDraw);
-//		btnDraw.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				Node rootNode = Parser.parse(textBox.getText());
-//				if (rootNode == null){
-//					canvas.drawError("Syntax Error"); 
-//				}
-//				else {
-//					canvas.drawArea(rootNode, colourList[colourChooser.getSelectedIndex()]);
-//				}
-//			}
-//		});
+		Button btnDraw = new Button();
+		btnDraw.setLabel("Draw");
+		btnDraw.setBounds(canvas.getWidth() + canvas.getX() - buttonX, canvas.getY() + canvas.getHeight() + 2*spacingY + buttonY, buttonX, buttonY);
+		add(btnDraw);
+		btnDraw.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Node rootNode = Parser.parse(textBox.getText());
+				if (rootNode == null){
+					canvas.drawError("Syntax Error"); 
+				}
+				else {
+					canvas.drawArea(rootNode, colourList[colourChooser.getSelectedIndex()]);
+				}
+			}
+		});
 
 		Button btnSave = new Button();
 		btnSave.setLabel("Save");
@@ -182,7 +182,7 @@ public class DrawingFrame extends Frame {
 				btnClear.setBounds(spacingX, canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
 				colourChooser.setBounds(spacingX + canvas.getWidth()/2 - buttonX/2, canvas.getY() + canvas.getHeight() + spacingY, buttonX, 20);
 				btnDrawPixel.setBounds(canvas.getWidth() + canvas.getX() - buttonX, canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
-//				btnDraw.setBounds(canvas.getWidth() + canvas.getX() - buttonX, canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
+				btnDraw.setBounds(canvas.getWidth() + canvas.getX() - buttonX, canvas.getY() + canvas.getHeight() + 2*spacingY + buttonY, buttonX, buttonY);
 				btnLoad.setBounds(2*canvas.getWidth() + canvas.getX() + spacingX - buttonX, canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
 				btnSave.setBounds(2*spacingX + canvas.getWidth(), canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
 				btnHelp.setBounds(2*canvas.getWidth() + canvas.getX() + spacingX - buttonX, canvas.getY() + canvas.getHeight() + 2*spacingY + buttonY, buttonX, buttonY);
