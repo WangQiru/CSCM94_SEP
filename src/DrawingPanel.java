@@ -8,16 +8,17 @@ import java.awt.image.BufferedImage;
 
 @SuppressWarnings("serial")
 public class DrawingPanel extends Panel {
-
+	
 	public DrawingPanel(){
 	}
 	
 	//Method for drawing an Area
-	public void drawArea(Area finalArea){
+	public void drawArea(Area finalArea, Color colour){
 		Graphics2D canvasGraphics = (Graphics2D)this.getGraphics();
 		
 		//Drawing the axes
 		drawAxes();
+		
 		//Setting the origin to be in the middle of the canvas
 		canvasGraphics.translate(this.getWidth()/2, this.getHeight()/2);
 		
@@ -25,7 +26,7 @@ public class DrawingPanel extends Panel {
 		AffineTransform flipVertical = AffineTransform.getScaleInstance(1, -1);
 		canvasGraphics.transform(flipVertical);
 
-		canvasGraphics.setColor(Color.blue);
+		canvasGraphics.setColor(colour);
 		canvasGraphics.fill(finalArea);
 		paint(canvasGraphics);
 	}
@@ -37,7 +38,7 @@ public class DrawingPanel extends Panel {
 		//Drawing horizontal and vertical lines
 		axesGraphics.drawLine(this.getWidth()/2, 0, this.getWidth()/2, this.getHeight());
 		axesGraphics.drawLine(0, this.getHeight()/2, this.getWidth(), this.getHeight()/2);
-		axesGraphics.setColor(Color.black);
+		axesGraphics.setColor(Color.BLACK);
 		paint(axesGraphics);
 	}
 
@@ -45,7 +46,6 @@ public class DrawingPanel extends Panel {
 	public void drawPixels(BufferedImage pixelCanvas) {
 		Graphics2D pixelGraphics = (Graphics2D)this.getGraphics();
 		drawAxes();
-		pixelGraphics.setColor(Color.blue);
 		pixelGraphics.drawImage(pixelCanvas, null, null);
 		paint(pixelGraphics);
 	}

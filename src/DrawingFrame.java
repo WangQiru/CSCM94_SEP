@@ -1,4 +1,5 @@
 import java.awt.Button;
+import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
@@ -45,8 +46,8 @@ public class DrawingFrame extends Frame {
 		canvas.setBounds(spacingX, spacingY + 30, this.getWidth()/2 - (3*spacingX/2), this.getHeight() - (4*spacingY + 2*buttonY + 30));
 		add(canvas);
 		canvas.setBackground(Color.white);
-
-		//Cheating to get a 1-pixel-wide border around the canvas
+		
+		//Cheating to get a 1-pixel-wide border around the canvas by creating an all-black canvas behind it
 		DrawingPanel canvasOutline = new DrawingPanel();		
 		canvasOutline.setBounds(canvas.getX() - 1, canvas.getY() - 1, canvas.getWidth() + 2, canvas.getHeight() + 2);	
 		add(canvasOutline);
@@ -68,6 +69,27 @@ public class DrawingFrame extends Frame {
 				canvas.drawAxes();
 			}
 		});
+
+		//Dropdown for choosing drawing colour
+		Choice colourChooser = new Choice();
+		colourChooser.add("Black");
+		colourChooser.add("Blue");
+		colourChooser.add("Cyan");
+		colourChooser.add("Dark Gray");
+		colourChooser.add("Gray");
+		colourChooser.add("Green");
+		colourChooser.add("Light Gray");
+		colourChooser.add("Magenta");
+		colourChooser.add("Orange");
+		colourChooser.add("Pink");
+		colourChooser.add("Red");
+		colourChooser.add("Yellow");
+		colourChooser.setBounds(spacingX + canvas.getWidth()/2 - buttonX/2, canvas.getY() + canvas.getHeight() + spacingY, buttonX, 20);
+		colourChooser.select("Blue");
+		add(colourChooser);
+		
+		//Array storing the built-in Java colours as Color objects, for use with colour chooser dropdown
+		Color[] colourList = {Color.BLACK,Color.BLUE,Color.CYAN,Color.DARK_GRAY,Color.GRAY,Color.GREEN,Color.LIGHT_GRAY,Color.MAGENTA,Color.ORANGE,Color.PINK,Color.RED,Color.YELLOW};
 		
 		Button btnDrawPixel = new Button();
 		btnDrawPixel.setLabel("Draw");
@@ -90,7 +112,7 @@ public class DrawingFrame extends Frame {
 							//corner, pixels are shifted by half the canvas width and height, and the y values are multiplied
 							//by -1 to flip the image vertically
 							if (rootNode.drawPixel(j - canvas.getWidth()/2, - (i - canvas.getHeight()/2))){
-								pixelCanvas.setRGB(j, i, Color.BLUE.getRGB());
+								pixelCanvas.setRGB(j, i, colourList[colourChooser.getSelectedIndex()].getRGB());
 							}
 							else{
 								//If current pixel should not be drawn, draw a transparent pixel
@@ -116,7 +138,7 @@ public class DrawingFrame extends Frame {
 //					canvas.drawError("Syntax Error"); 
 //				}
 //				else {
-//					canvas.drawArea(rootNode.draw());
+//					canvas.drawArea(rootNode.draw(), colourList[colourChooser.getSelectedIndex()]);
 //				}
 //			}
 //		});
@@ -187,10 +209,11 @@ public class DrawingFrame extends Frame {
 				textBox.setBounds(canvas.getWidth() + canvas.getX() + spacingX, canvas.getY(), canvas.getWidth(), canvas.getHeight());
 				textBox.textArea.setBounds(10, 10, textBox.getWidth() - 10, textBox.getHeight() - 10);
 				btnClear.setBounds(spacingX, canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
+				colourChooser.setBounds(spacingX + canvas.getWidth()/2 - buttonX/2, canvas.getY() + canvas.getHeight() + spacingY, buttonX, 20);
+				btnDrawPixel.setBounds(canvas.getWidth() + canvas.getX() - buttonX, canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
 //				btnDraw.setBounds(canvas.getWidth() + canvas.getX() - buttonX, canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
 				btnLoad.setBounds(2*canvas.getWidth() + canvas.getX() + spacingX - buttonX, canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
 				btnSave.setBounds(2*spacingX + canvas.getWidth(), canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
-				btnDrawPixel.setBounds(canvas.getWidth() + canvas.getX() - buttonX, canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
 				btnHelp.setBounds(2*canvas.getWidth() + canvas.getX() + spacingX - buttonX, canvas.getY() + canvas.getHeight() + 2*spacingY + buttonY, buttonX, buttonY);
 			}
 		});
