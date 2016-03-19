@@ -46,6 +46,7 @@ public class Parser {
 			}
 			
 			//TRANSFORMS
+			//Repeat transforms take an extra argument (the number of repeats)
 			else if (instructions.startsWith("RotateN")){
 				return new Rotate(parse(argList.get(0)),Double.parseDouble(argList.get(1)),Integer.parseInt(argList.get(2)));
 			}
