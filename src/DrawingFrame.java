@@ -40,16 +40,19 @@ public class DrawingFrame extends Frame {
 		setLayout(null);
 		setBackground(new Color(225,225,225));
 
+		//The canvas on which shapes will be drawn
 		DrawingPanel canvas = new DrawingPanel();
 		canvas.setBounds(spacingX, spacingY + 30, this.getWidth()/2 - (3*spacingX/2), this.getHeight() - (4*spacingY + 2*buttonY + 30));
 		add(canvas);
 		canvas.setBackground(Color.white);
 
+		//Cheating to get a 1-pixel-wide border around the canvas
 		DrawingPanel canvasOutline = new DrawingPanel();		
 		canvasOutline.setBounds(canvas.getX() - 1, canvas.getY() - 1, canvas.getWidth() + 2, canvas.getHeight() + 2);	
 		add(canvasOutline);
 		canvasOutline.setBackground(Color.black);
 		
+		//The text box in which instructions will be entered
 		CodingPanel textBox = new CodingPanel();
 		textBox.setBounds(canvas.getWidth() + canvas.getX() + spacingX, canvas.getY(), canvas.getWidth(), canvas.getHeight());
 		textBox.textArea.setBounds(10, 10, textBox.getWidth() - 10, textBox.getHeight() - 10);
@@ -75,16 +78,22 @@ public class DrawingFrame extends Frame {
 			public void actionPerformed(ActionEvent e) {
 				Node rootNode = Parser.parse(textBox.getText());
 				if (rootNode == null){
-					canvas.drawArea(null); 
+					//Drawing an error message if Parser.parse fails
+					canvas.drawError("Syntax Error"); 
 				}
 				else {
+					//Creating an image that can be drawn pixel by pixel that is the size of the canvas
 					BufferedImage pixelCanvas = new BufferedImage(canvas.getWidth(), canvas.getHeight(), BufferedImage.TYPE_INT_ARGB);
 					for (int i = 0; i < canvas.getHeight(); ++i){
 						for (int j = 0; j < canvas.getWidth(); ++j){
-							if (rootNode.drawPixel(j - canvas.getWidth()/2, -i + canvas.getHeight()/2)){
+							//Checking if the current pixel should be drawn. Because the origin of pixelCanvas is in the top left
+							//corner, pixels are shifted by half the canvas width and height, and the y values are multiplied
+							//by -1 to flip the image vertically
+							if (rootNode.drawPixel(j - canvas.getWidth()/2, - (i - canvas.getHeight()/2))){
 								pixelCanvas.setRGB(j, i, Color.BLUE.getRGB());
 							}
 							else{
+								//If current pixel should not be drawn, draw a transparent pixel
 								pixelCanvas.setRGB(j,  i, new Color(0.0f, 0.0f, 0.0f, 0.0f).getRGB());
 							}
 						}
@@ -94,9 +103,10 @@ public class DrawingFrame extends Frame {
 			}
 		});
 
+		//Button for drawing using the Area class
 //		Button btnDraw = new Button();
 //		btnDraw.setLabel("Draw");
-//		btnDraw.setBounds(canvas.getWidth() + canvas.getX() - buttonX, canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
+//		btnDraw.setBounds(canvas.getWidth() + canvas.getX() - buttonX, canvas.getY() + canvas.getHeight() + 2*spacingY + buttonY, buttonX, buttonY);
 //		add(btnDraw);
 //		btnDraw.addActionListener(new ActionListener() {
 //			@Override
@@ -117,6 +127,7 @@ public class DrawingFrame extends Frame {
 		add(btnSave);
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
+				//Opening a FileChooser and starting it in the current working directory
 				JFileChooser fileChooser = new JFileChooser();
 				fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
 				int result = fileChooser.showSaveDialog(canvas.getParent());
@@ -139,6 +150,7 @@ public class DrawingFrame extends Frame {
 		add(btnLoad);
 		btnLoad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
+				//Opening a FileChooser, starting it in the current working directory and limiting the files that can be opened to .txt files
 				JFileChooser fileChooser = new JFileChooser();
 				FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
 				fileChooser.setFileFilter(filter);
@@ -167,7 +179,7 @@ public class DrawingFrame extends Frame {
 				help.setTitle("Help");
 			}
 		});
-
+		//Dynamically resizing and repositioning window elements on window resize
 		addComponentListener(new ComponentAdapter(){
 			public void componentResized(ComponentEvent e){
 				canvas.setBounds(spacingX, spacingY + 30, getWidth()/2 - (3*spacingX/2), getHeight() - (4*spacingY + 2*buttonY + 30));
@@ -189,6 +201,7 @@ public class DrawingFrame extends Frame {
 				System.exit(0);
 			}
 		});
+		//Drawing axes to the canvas on window initialization. Doesn't always work for some reason.
 		canvas.drawAxes();
 	}
 

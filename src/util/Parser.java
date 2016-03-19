@@ -73,7 +73,7 @@ public class Parser {
 			}
 			
 			else if (instructions.startsWith("Scale")){
-				if (argList.size() == 3){
+				if (argList.size() == 2){
 					return new Scale(parse(argList.get(0)),Double.parseDouble(argList.get(1)), Double.parseDouble(argList.get(1)));
 				}
 				else{

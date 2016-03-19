@@ -12,24 +12,20 @@ public class DrawingPanel extends Panel {
 	public DrawingPanel(){
 	}
 	
+	//Method for drawing an Area
 	public void drawArea(Area finalArea){
 		Graphics2D canvasGraphics = (Graphics2D)this.getGraphics();
 		
-		if (finalArea == null){
-		}
-		
 		//Drawing the axes
 		drawAxes();
-		
 		//Setting the origin to be in the middle of the canvas
 		canvasGraphics.translate(this.getWidth()/2, this.getHeight()/2);
 		
 		//Flipping the coordinates vertically so that y increases as you go up, not down
 		AffineTransform flipVertical = AffineTransform.getScaleInstance(1, -1);
 		canvasGraphics.transform(flipVertical);
-		
-		canvasGraphics.setColor(Color.blue);
 
+		canvasGraphics.setColor(Color.blue);
 		canvasGraphics.fill(finalArea);
 		paint(canvasGraphics);
 	}
@@ -38,12 +34,14 @@ public class DrawingPanel extends Panel {
 		Graphics2D axesGraphics = (Graphics2D)this.getGraphics();
 		//Clearing the canvas
 		axesGraphics.clearRect(0, 0, getWidth(), getHeight());
+		//Drawing horizontal and vertical lines
 		axesGraphics.drawLine(this.getWidth()/2, 0, this.getWidth()/2, this.getHeight());
 		axesGraphics.drawLine(0, this.getHeight()/2, this.getWidth(), this.getHeight()/2);
 		axesGraphics.setColor(Color.black);
 		paint(axesGraphics);
 	}
 
+	//Method for drawing a BufferedImage
 	public void drawPixels(BufferedImage pixelCanvas) {
 		Graphics2D pixelGraphics = (Graphics2D)this.getGraphics();
 		drawAxes();
