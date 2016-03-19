@@ -1,3 +1,4 @@
+package userinterface;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -6,6 +7,8 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 
+import bean.Node;
+
 @SuppressWarnings("serial")
 public class DrawingPanel extends Panel {
 	
@@ -13,7 +16,7 @@ public class DrawingPanel extends Panel {
 	}
 	
 	//Method for drawing an Area
-	public void drawArea(Area finalArea, Color colour){
+	public void drawArea(Node rootNode, Color colour){
 		Graphics2D canvasGraphics = (Graphics2D)this.getGraphics();
 		
 		//Drawing the axes
@@ -27,6 +30,7 @@ public class DrawingPanel extends Panel {
 		canvasGraphics.transform(flipVertical);
 
 		canvasGraphics.setColor(colour);
+		Area finalArea = rootNode.draw();
 		canvasGraphics.fill(finalArea);
 		paint(canvasGraphics);
 	}
@@ -43,7 +47,23 @@ public class DrawingPanel extends Panel {
 	}
 
 	//Method for drawing a BufferedImage
-	public void drawPixels(BufferedImage pixelCanvas) {
+	public void drawPixels(Node rootNode, Color colour) {
+		//Creating an image that can be drawn pixel by pixel that is the size of the canvas
+		BufferedImage pixelCanvas = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+		for (int i = 0; i < getHeight(); ++i){
+			for (int j = 0; j < getWidth(); ++j){
+				//Checking if the current pixel should be drawn. Because the origin of pixelCanvas is in the top left
+				//corner, pixels are shifted by half the canvas width and height, and the y values are multiplied
+				//by -1 to flip the image vertically
+				if (rootNode.drawPixel(j - getWidth()/2, - (i - getHeight()/2))){
+					pixelCanvas.setRGB(j, i, colour.getRGB());
+				}
+				else{
+					//If current pixel should not be drawn, draw a transparent pixel
+					pixelCanvas.setRGB(j, i, 0);
+				}
+			}
+		}
 		Graphics2D pixelGraphics = (Graphics2D)this.getGraphics();
 		drawAxes();
 		pixelGraphics.drawImage(pixelCanvas, null, null);

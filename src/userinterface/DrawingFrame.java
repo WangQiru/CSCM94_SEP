@@ -1,3 +1,4 @@
+package userinterface;
 import java.awt.Button;
 import java.awt.Choice;
 import java.awt.Color;
@@ -8,16 +9,9 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.PrintWriter;
-
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import bean.Node;
+import util.FileIO;
 import util.Parser;
 
 @SuppressWarnings("serial")
@@ -91,6 +85,7 @@ public class DrawingFrame extends Frame {
 		//Array storing the built-in Java colours as Color objects, for use with colour chooser dropdown
 		Color[] colourList = {Color.BLACK,Color.BLUE,Color.CYAN,Color.DARK_GRAY,Color.GRAY,Color.GREEN,Color.LIGHT_GRAY,Color.MAGENTA,Color.ORANGE,Color.PINK,Color.RED,Color.YELLOW};
 		
+		//Button for drawing pixel-by-pixel
 		Button btnDrawPixel = new Button();
 		btnDrawPixel.setLabel("Draw");
 		btnDrawPixel.setBounds(canvas.getWidth() + canvas.getX() - buttonX, canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
@@ -104,23 +99,7 @@ public class DrawingFrame extends Frame {
 					canvas.drawError("Syntax Error"); 
 				}
 				else {
-					//Creating an image that can be drawn pixel by pixel that is the size of the canvas
-					BufferedImage pixelCanvas = new BufferedImage(canvas.getWidth(), canvas.getHeight(), BufferedImage.TYPE_INT_ARGB);
-					for (int i = 0; i < canvas.getHeight(); ++i){
-						for (int j = 0; j < canvas.getWidth(); ++j){
-							//Checking if the current pixel should be drawn. Because the origin of pixelCanvas is in the top left
-							//corner, pixels are shifted by half the canvas width and height, and the y values are multiplied
-							//by -1 to flip the image vertically
-							if (rootNode.drawPixel(j - canvas.getWidth()/2, - (i - canvas.getHeight()/2))){
-								pixelCanvas.setRGB(j, i, colourList[colourChooser.getSelectedIndex()].getRGB());
-							}
-							else{
-								//If current pixel should not be drawn, draw a transparent pixel
-								pixelCanvas.setRGB(j,  i, new Color(0.0f, 0.0f, 0.0f, 0.0f).getRGB());
-							}
-						}
-					}
-					canvas.drawPixels(pixelCanvas);
+					canvas.drawPixels(rootNode, colourList[colourChooser.getSelectedIndex()]);
 				}
 			}
 		});
@@ -138,7 +117,7 @@ public class DrawingFrame extends Frame {
 //					canvas.drawError("Syntax Error"); 
 //				}
 //				else {
-//					canvas.drawArea(rootNode.draw(), colourList[colourChooser.getSelectedIndex()]);
+//					canvas.drawArea(rootNode, colourList[colourChooser.getSelectedIndex()]);
 //				}
 //			}
 //		});
@@ -149,21 +128,9 @@ public class DrawingFrame extends Frame {
 		add(btnSave);
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//Opening a FileChooser and starting it in the current working directory
-				JFileChooser fileChooser = new JFileChooser();
-				fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
-				int result = fileChooser.showSaveDialog(canvas.getParent());
-				if (result == JFileChooser.APPROVE_OPTION) {
-				    File savedFile = fileChooser.getSelectedFile();
-				    try{
-				    	PrintWriter out = new PrintWriter(savedFile);
-				    	out.println(Parser.parse(textBox.getText()).print());
-				    	out.close();
-				    } catch(Exception ex){
-						canvas.drawError("File Save Error"); 
-				    }
+				FileIO fileIO = new FileIO(canvas,textBox);
+				fileIO.fileOperation("save");
 				}
-			}
 		});
 
 		Button btnLoad = new Button();
@@ -172,22 +139,8 @@ public class DrawingFrame extends Frame {
 		add(btnLoad);
 		btnLoad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//Opening a FileChooser, starting it in the current working directory and limiting the files that can be opened to .txt files
-				JFileChooser fileChooser = new JFileChooser();
-				FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
-				fileChooser.setFileFilter(filter);
-				fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
-				int result = fileChooser.showOpenDialog(canvas.getParent());
-				if (result == JFileChooser.APPROVE_OPTION) {
-				    File selectedFile = fileChooser.getSelectedFile();
-				    try{
-				    	BufferedReader fileReader = new BufferedReader(new FileReader(selectedFile));
-				    	textBox.setText(fileReader.readLine());
-					    fileReader.close();
-				    } catch(Exception ex){
-						canvas.drawError("File Read Error"); 
-				    }
-				}
+				FileIO fileIO = new FileIO(canvas,textBox);
+				fileIO.fileOperation("load");
 			}
 		});
 
