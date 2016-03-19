@@ -38,14 +38,14 @@ public class DrawingFrame extends Frame {
 		//The canvas on which shapes will be drawn
 		DrawingPanel canvas = new DrawingPanel();
 		canvas.setBounds(spacingX, spacingY + 30, this.getWidth()/2 - (3*spacingX/2), this.getHeight() - (4*spacingY + 2*buttonY + 30));
-		add(canvas);
 		canvas.setBackground(Color.white);
+		add(canvas);
 		
 		//Cheating to get a 1-pixel-wide border around the canvas by creating an all-black canvas behind it
 		DrawingPanel canvasOutline = new DrawingPanel();		
-		canvasOutline.setBounds(canvas.getX() - 1, canvas.getY() - 1, canvas.getWidth() + 2, canvas.getHeight() + 2);	
-		add(canvasOutline);
+		canvasOutline.setBounds(canvas.getX() - 1, canvas.getY() - 1, canvas.getWidth() + 2, canvas.getHeight() + 2);
 		canvasOutline.setBackground(Color.black);
+		add(canvasOutline);
 		
 		//The text box in which instructions will be entered
 		CodingPanel textBox = new CodingPanel();
@@ -128,9 +128,17 @@ public class DrawingFrame extends Frame {
 		add(btnSave);
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				FileIO fileIO = new FileIO(canvas,textBox);
-				fileIO.fileOperation("save");
+				//Attempts to save text by creating a tree then printing it to a file
+				Node rootNode = Parser.parse(textBox.getText());
+				if (rootNode == null){
+					//Drawing an error message if Parser.parse fails, so only valid trees can be saved
+					canvas.drawError("Syntax Error"); 
 				}
+				//If an error ocurred, print it to the canvas
+				else if(!FileIO.fileSave(rootNode.print())){
+					canvas.drawError("File Save Error"); 
+				}
+			}
 		});
 
 		Button btnLoad = new Button();
@@ -139,8 +147,17 @@ public class DrawingFrame extends Frame {
 		add(btnLoad);
 		btnLoad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				FileIO fileIO = new FileIO(canvas,textBox);
-				fileIO.fileOperation("load");
+				String fileContents = FileIO.fileLoad();
+				
+				//If an error ocurred, print it to the canvas
+				if(fileContents == null){
+					canvas.drawError("File Read Error");
+				}
+				//If the user did not cancel loading, or did not load an empty file, print the contents of the
+				//file to the text box
+				else if (fileContents != ""){
+					textBox.setText(fileContents);
+				}
 			}
 		});
 
@@ -154,6 +171,7 @@ public class DrawingFrame extends Frame {
 				help.setTitle("Help");
 			}
 		});
+		
 		//Dynamically resizing and repositioning window elements on window resize
 		addComponentListener(new ComponentAdapter(){
 			public void componentResized(ComponentEvent e){

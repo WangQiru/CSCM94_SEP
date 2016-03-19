@@ -7,49 +7,53 @@ import java.io.PrintWriter;
 
 import javax.swing.JFileChooser;
 
-import userinterface.DrawingPanel;
-import userinterface.CodingPanel;
-
 public class FileIO{
 	
-	public DrawingPanel canvas;
-	public CodingPanel textBox;
-	
-	public FileIO(DrawingPanel canvas, CodingPanel textBox){
-		this.canvas = canvas;
-		this.textBox = textBox;
+	//FileIO reads/writes text from/to a file
+	public FileIO(){
 	}
 	
-	public void fileOperation(String operation){
+	public static boolean fileSave(String instructions){
 		//Opening a FileChooser and starting it in the current working directory
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
-		if (operation.equals("save")){
-			int result = fileChooser.showSaveDialog(null);
-			if (result == JFileChooser.APPROVE_OPTION) {
-			    File savedFile = fileChooser.getSelectedFile();
-			    try{
-			    	PrintWriter out = new PrintWriter(savedFile);
-			    	out.println(Parser.parse(textBox.getText()).print());
-			    	out.close();
-			    } catch(Exception ex){
-					canvas.drawError("File Save Error"); 
-			    }
-			}
+		int result = fileChooser.showSaveDialog(null);
+		
+		//If the user selects a file, write the given instructions to it
+		if (result == JFileChooser.APPROVE_OPTION) {
+		    File savedFile = fileChooser.getSelectedFile();
+		    try{
+		    	PrintWriter out = new PrintWriter(savedFile);
+		    	out.println(instructions);
+		    	out.close();
+		    } catch(Exception e){
+		    	return false;
+		    }
 		}
-		if(operation.equals("load")){
-			int result = fileChooser.showOpenDialog(null);
-			if (result == JFileChooser.APPROVE_OPTION) {
-			    File selectedFile = fileChooser.getSelectedFile();
-			    try{
-			    	BufferedReader fileReader = new BufferedReader(new FileReader(selectedFile));
-			    	textBox.setText(fileReader.readLine());
-				    fileReader.close();
-			    } catch(Exception ex){
-					canvas.drawError("File Read Error"); 
-			    }
-			}
-		}
+		return true;
 	}
 	
+	public static String fileLoad(){
+		//Opening a FileChooser and starting it in the current working directory
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
+		int result = fileChooser.showOpenDialog(null);
+		
+		//Initializing the String to hold the contents of the file as empty
+	    String fileContents = "";
+	    
+	    //If the user selects a file, open it, read it and store the contents in fileContents
+		if (result == JFileChooser.APPROVE_OPTION) {
+		    File selectedFile = fileChooser.getSelectedFile();
+		    try{
+		    	BufferedReader fileReader = new BufferedReader(new FileReader(selectedFile));
+		    	fileContents = fileReader.readLine();
+			    fileReader.close();
+		    } catch(Exception e){
+		    	//If an error occurs, return null
+		    	return null;
+		    }
+		}
+		return fileContents;
+	}
 }
