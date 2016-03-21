@@ -36,7 +36,7 @@ public class Square extends Shape {
 
 	@Override
 	public boolean drawPixel(double x, double y) {
-		if (x >= -this.radius && x < this.radius && y >= -this.radius && y < this.radius){
+		if (x >= -this.radius && x < this.radius && y > -this.radius && y <= this.radius){
 			return true;
 		}
 		return false;

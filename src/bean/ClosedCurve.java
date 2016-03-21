@@ -34,22 +34,34 @@ public class ClosedCurve implements Node{
 
 	@Override
 	public Area draw() {
-		double[] args = this.curveList.get(0);
-		CubicCurve2D curve = new CubicCurve2D.Double(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7]);
-		Path2D path = new Path2D.Double(curve);
-		for (int i = 1; i < this.curveList.size(); ++i){
-			args = this.curveList.get(i);
-			curve.setCurve(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7]);
+		//Create an empty Path2D
+		Path2D path = new Path2D.Double();
+		//For every double array in curveList
+		for (int i = 0; i < this.curveList.size(); ++i){
+			double[] args = this.curveList.get(i);
+			//Create a cubic Bezier curve using the arguments in args[]
+			CubicCurve2D curve = new CubicCurve2D.Double(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7]);
+			//Add that curve to the existing path
 			path.append(curve, true);
 		}
-		path.closePath();
+		//Draw the path
 		return new Area(path);
 	}
 
 	@Override
 	public boolean drawPixel(double x, double y) {
-		// TODO Auto-generated method stub
-		return false;
+		//Create an empty Path2D
+		Path2D path = new Path2D.Double();
+		//For every double array in curveList
+		for (int i = 0; i < this.curveList.size(); ++i){
+			double[] args = this.curveList.get(i);
+			//Create a cubic Bezier curve using the arguments in args[]
+			CubicCurve2D curve = new CubicCurve2D.Double(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7]);
+			//Add that curve to the existing path
+			path.append(curve, true);
+		}
+		//Check if the given pixel is contained by the path
+		return path.contains(x, y);
 	}
 	
 }
