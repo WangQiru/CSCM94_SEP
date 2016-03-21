@@ -36,7 +36,7 @@ public class Square extends Shape {
 
 	@Override
 	public boolean drawPixel(double x, double y) {
-		if (x >= -this.radius && x < this.radius && y > -this.radius && y <= this.radius){
+		if (x >= -this.radius/Math.sqrt(2) && x < this.radius/Math.sqrt(2) && y > -this.radius/Math.sqrt(2) && y <= this.radius/Math.sqrt(2)){
 			return true;
 		}
 		return false;
@@ -44,8 +44,8 @@ public class Square extends Shape {
 
 	@Override
 	public Area draw() {
-		int[] xCoords = {(int) -this.radius, (int) this.radius, (int) this.radius, (int) -this.radius};
-		int[] yCoords = {(int) this.radius, (int) this.radius, (int) -this.radius, (int) -this.radius};
+		int[] xCoords = {(int) (-this.radius/Math.sqrt(2)), (int) (this.radius/Math.sqrt(2)),  (int) (this.radius/Math.sqrt(2)),  (int) (-this.radius/Math.sqrt(2))};
+		int[] yCoords = {(int) (this.radius/Math.sqrt(2)), (int) (this.radius/Math.sqrt(2)),  (int) (-this.radius/Math.sqrt(2)),  (int) (-this.radius/Math.sqrt(2))};
 		Polygon shape = new Polygon(xCoords, yCoords, 4);
 		return new Area(shape);
 	}
