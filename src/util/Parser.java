@@ -44,13 +44,13 @@ public class Parser {
 			}
 			
 			//A curve segment is defined by 4 points, each with an x and y value (8 values total)
-			//A closed curve is a sequence of one or more curves
-			else if (instructions.startsWith("ClosedCurve")){
+			//A curve is a sequence of one or more curve segments
+			else if (instructions.startsWith("Curve")){
 				
 				//Create an empty list of curve segment coordinates
 				ArrayList<double[]> curveSegmentList = new ArrayList<double[]>();
 				
-				//If this closed curve consists of more than one curve segment, add each of them to the list 
+				//If this curve consists of more than one curve segment, add each of them to the list 
 				if (argList.get(0).startsWith("(")){
 					for (int i = 0; i < argList.size(); ++i){
 						
@@ -64,7 +64,7 @@ public class Parser {
 						curveSegmentList.add(curvePoints);
 					}
 				}
-				//If the closed curve consists of only one curve segment, add it to the list
+				//If the curve consists of only one curve segment, add it to the list
 				else{
 					double[] curvePoints = new double[argList.size()];
 					for (int i = 0; i < argList.size(); ++i){

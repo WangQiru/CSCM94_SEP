@@ -11,7 +11,7 @@ import java.awt.event.WindowEvent;
 @SuppressWarnings("serial")
 public class HelpFrame extends Frame {
 	public HelpFrame(){
-		setSize(520,535);
+		setSize(520,600);
 		setVisible(true);
 		setLayout(null);
 		setResizable(false);
@@ -24,11 +24,16 @@ public class HelpFrame extends Frame {
 		String helpText = "Syntax for inputting instructions:\n \n"
 				+ "SHAPES\n"
 				+ "Square(radius)\n"
-				+ "Rectangle(X radius, Y radius)\n"
+				+ "Rectangle(width, height)\n"
 				+ "Circle(radius)\n"
 				+ "Triangle(radius)\n"
-				+ "ClosedCurve(curve segment 1,...) \n"
-				+ "Curve segments are Bezier curves defined as: (x1, y1, x2, y2, x3, y3, x4, y4) \n \n"
+				+ "Curve(curve segment 1, curve segment 2,...) \n"
+				+ "Curve segments are either Bezier curves defined as: (x1, y1, x2, y2, x3, y3, x4, y4) \n"
+				+ "OR individual points defined as: (x, y).\n"
+				+ "The Curve command can also be used to draw polygons containing only straight lines between vertices "
+				+ "if desired. \n"
+				+ "If two consecutive Bezier curves don't share a start/end point, a line is drawn between them "
+				+ "to form a continuous shape. \n \n"
 				+ "TRANSFORMS\n"
 				+ "Rotate(Node, angle) - Rotation is anticlockwise\n"
 				+ "Translate(Node, X distance, Y distance)\n"
