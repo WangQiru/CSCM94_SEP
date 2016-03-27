@@ -21,10 +21,15 @@ public class Parser {
 	public static Node parse(String input){
 		//Removing all newlines, tabs and whitespace from input string
 		String instructions = input.replaceAll("\n", "").replaceAll("\t", "").replaceAll(" ", "").replaceAll("\r", "");
-		
+		String argument=null;
 		//Creating a substring of whatever is contained within the outermost pair of brackets
-		String argument = instructions.substring(instructions.indexOf('(') + 1,instructions.lastIndexOf(')'));
-		
+		try {
+			argument = instructions.substring(instructions.indexOf('(') + 1,instructions.lastIndexOf(')'));
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Wrong format");
+			return null;
+		}		
 		//Using getArgList to produce a list of the comma separated arguments
 		List<String> argList = getArgList(argument);
 		

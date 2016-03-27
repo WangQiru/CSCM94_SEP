@@ -1,25 +1,32 @@
 import java.awt.Button;
 import java.awt.Color;
+import java.awt.FileDialog;
 import java.awt.Frame;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
+import bean.Node;
 import util.Parser;
 
 public class DrawingFrame extends Frame {
 	DrawingPanel canvas = new DrawingPanel();
 	DrawingPanel canvasOutline = new DrawingPanel();
 	CodingPanel textBox = new CodingPanel();
+	Frame thisFrame;
 	public DrawingFrame(){
+		thisFrame=this;
 		//Horizontal spacing between elements
 		int spacingX = 30;
 		//Vertical spacing between elements
@@ -39,7 +46,7 @@ public class DrawingFrame extends Frame {
 		add(canvas);
 		add(canvasOutline);
 		canvasOutline.setBackground(Color.black);
-		
+
 		add(textBox);
 
 		Button btnClear=new Button();
@@ -73,9 +80,12 @@ public class DrawingFrame extends Frame {
 						g2d.transform(flipVertical);
 						g2d.setColor(Color.blue);
 
-						Area finalShape = Parser.parse(textBox.getText()).draw();
-						g2d.fill(finalShape);
-						canvas.paint(g2d);
+						Node node=Parser.parse(textBox.getText());
+						if(node!=null){						
+							Area finalShape = node.draw();
+							g2d.fill(finalShape);
+							canvas.paint(g2d);
+						}
 					}
 				}
 			}
@@ -85,11 +95,54 @@ public class DrawingFrame extends Frame {
 		btnLoad.setLabel("Load");
 		btnLoad.setBounds(2*canvas.getWidth() + canvas.getX() + spacingX - buttonX, canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
 		add(btnLoad);
+		btnLoad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0){				
+				FileDialog fc=new FileDialog(thisFrame,"Load from a file",0);
+				fc.setFile("*.draw");
+				fc.setVisible(true);
+				if(fc.getFile()!=null){
+					try (
+							FileReader fileReader = new FileReader(fc.getDirectory()+fc.getFile());
+							BufferedReader bufferedReader = new BufferedReader(fileReader);							
+							) 
+					{
+						String line = null;
+						String commands = "";
+						while ((line = bufferedReader.readLine()) != null) {
+							commands+=line;
+						}
+						bufferedReader.close();
+						textBox.setText(commands);
+						System.out.println(commands);
+					} catch (IOException x) {
+						System.err.format("IOException: %s%n", x);
+					}
+				}
+			}
+		});
 
 		Button btnSave = new Button();
 		btnSave.setLabel("Save");
 		btnSave.setBounds(2*spacingX + canvas.getWidth(), canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
 		add(btnSave);
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0){				
+				FileDialog fc=new FileDialog(thisFrame,"Save to a file",1);
+				fc.setVisible(true);
+				if(fc.getFile()!=null){
+					try (
+							FileWriter fileWriter = new FileWriter(fc.getDirectory()+fc.getFile()+".draw");
+							BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);						
+							) 
+					{
+						bufferedWriter.write(textBox.getText());
+						bufferedWriter.close();
+					} catch (IOException x) {
+						System.err.format("IOException: %s%n", x);
+					}
+				}
+			}
+		});
 
 		Button btnHelp = new Button();
 		btnHelp.setLabel("Help");
@@ -100,6 +153,10 @@ public class DrawingFrame extends Frame {
 				HelpFrame help = new HelpFrame();
 			}
 		});
+
+
+
+
 
 		addWindowListener(new WindowAdapter(){
 			public void windowClosing(WindowEvent e){
