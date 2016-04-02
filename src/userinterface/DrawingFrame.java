@@ -12,7 +12,9 @@ import java.awt.event.WindowEvent;
 
 import bean.Node;
 import util.FileIO;
+import util.LoadFile;
 import util.Parser;
+import util.SaveFile;
 
 @SuppressWarnings("serial")
 public class DrawingFrame extends Frame {
@@ -128,16 +130,17 @@ public class DrawingFrame extends Frame {
 		add(btnSave);
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//Attempts to save text by creating a tree then printing it to a file
-				Node rootNode = Parser.parse(textBox.getText());
-				if (rootNode == null){
-					//Drawing an error message if Parser.parse fails, so only valid trees can be saved
-					canvas.drawError("Syntax Error"); 
-				}
-				//If an error ocurred, print it to the canvas
-				else if(!FileIO.fileSave(rootNode.print())){
-					canvas.drawError("File Save Error"); 
-				}
+//				//Attempts to save text by creating a tree then printing it to a file
+//				Node rootNode = Parser.parse(textBox.getText());
+//				if (rootNode == null){
+//					//Drawing an error message if Parser.parse fails, so only valid trees can be saved
+//					canvas.drawError("Syntax Error"); 
+//				}
+//				//If an error ocurred, print it to the canvas
+//				else if(!FileIO.fileSave(rootNode.print())){
+//					canvas.drawError("File Save Error"); 
+//				}
+				SaveFile sf = new SaveFile(textBox.getText());
 			}
 		});
 
@@ -147,17 +150,19 @@ public class DrawingFrame extends Frame {
 		add(btnLoad);
 		btnLoad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				String fileContents = FileIO.fileLoad();
-				
-				//If an error ocurred, print it to the canvas
-				if(fileContents == null){
-					canvas.drawError("File Read Error");
-				}
-				//If the user did not cancel loading, or did not load an empty file, print the contents of the
-				//file to the text box
-				else if (fileContents != ""){
-					textBox.setText(fileContents);
-				}
+//				String fileContents = FileIO.fileLoad();
+//				
+//				//If an error ocurred, print it to the canvas
+//				if(fileContents == null){
+//					canvas.drawError("File Read Error");
+//				}
+//				//If the user did not cancel loading, or did not load an empty file, print the contents of the
+//				//file to the text box
+//				else if (fileContents != ""){
+//					textBox.setText(fileContents);
+//				}
+				LoadFile lf = new LoadFile();
+				textBox.setText(lf.getContent());
 			}
 		});
 
