@@ -1,5 +1,6 @@
 package userinterface;
 import java.awt.Button;
+import java.awt.Checkbox;
 import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Frame;
@@ -7,11 +8,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import bean.Node;
-import util.FileIO;
 import util.LoadFile;
 import util.Parser;
 import util.SaveFile;
@@ -36,7 +40,6 @@ public class DrawingFrame extends Frame {
 		setVisible(true);
 		setLayout(null);
 		setBackground(new Color(225,225,225));
-
 		//The canvas on which shapes will be drawn
 		DrawingPanel canvas = new DrawingPanel();
 		canvas.setBounds(spacingX, spacingY + 30, this.getWidth()/2 - (3*spacingX/2), this.getHeight() - (4*spacingY + 2*buttonY + 30));
@@ -54,7 +57,7 @@ public class DrawingFrame extends Frame {
 		textBox.setBounds(canvas.getWidth() + canvas.getX() + spacingX, canvas.getY(), canvas.getWidth(), canvas.getHeight());
 		textBox.textArea.setBounds(10, 10, textBox.getWidth() - 10, textBox.getHeight() - 10);
 		add(textBox);
-
+		
 		Button btnClear=new Button();
 		btnClear.setLabel("Clear");
 		btnClear.setBounds(spacingX, canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
@@ -177,6 +180,42 @@ public class DrawingFrame extends Frame {
 			}
 		});
 		
+		Checkbox cbAutoComplete=new Checkbox("Auto-Complete brackets");
+		cbAutoComplete.setBounds(2*spacingX + canvas.getWidth(), canvas.getY() + canvas.getHeight() + 4*spacingY, 2*buttonX, buttonY);
+		cbAutoComplete.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				if(cbAutoComplete.getState()){
+					textBox.textArea.addKeyListener(new KeyAdapter() {
+						public void keyTyped(KeyEvent e) {
+							if (e.getKeyChar()=='(') {
+								e.consume();
+								textBox.textArea.insert("()", textBox.textArea.getCaretPosition());
+								textBox.textArea.setCaretPosition(textBox.textArea.getCaretPosition()-1);
+							}
+							if (e.getKeyChar()=='{') {
+								e.consume();
+								textBox.textArea.insert("{}", textBox.textArea.getCaretPosition());
+								textBox.textArea.setCaretPosition(textBox.textArea.getCaretPosition()-1);
+							}
+							if (e.getKeyChar()=='[') {
+								e.consume();
+								textBox.textArea.insert("[]", textBox.textArea.getCaretPosition());
+								textBox.textArea.setCaretPosition(textBox.textArea.getCaretPosition()-1);
+							}
+						}
+					});
+				}
+				else{
+					textBox.textArea.removeKeyListener(textBox.textArea.getKeyListeners()[0]);
+				}
+				
+			}
+		});
+		add(cbAutoComplete);
+		
+		
 		//Dynamically resizing and repositioning window elements on window resize
 		addComponentListener(new ComponentAdapter(){
 			public void componentResized(ComponentEvent e){
@@ -191,8 +230,12 @@ public class DrawingFrame extends Frame {
 				btnLoad.setBounds(2*canvas.getWidth() + canvas.getX() + spacingX - buttonX, canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
 				btnSave.setBounds(2*spacingX + canvas.getWidth(), canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
 				btnHelp.setBounds(2*canvas.getWidth() + canvas.getX() + spacingX - buttonX, canvas.getY() + canvas.getHeight() + 2*spacingY + buttonY, buttonX, buttonY);
+				cbAutoComplete.setBounds(2*spacingX + canvas.getWidth(), canvas.getY() + canvas.getHeight() + spacingY, 2*buttonX, buttonY);
 			}
 		});
+		
+		
+
 
 		addWindowListener(new WindowAdapter(){
 			public void windowClosing(WindowEvent e){
