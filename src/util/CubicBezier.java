@@ -1,4 +1,4 @@
-package bean;
+package util;
 
 import java.awt.geom.CubicCurve2D;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 //A class for creating and manipulating cubic Bezier curves
 
-class CubicBezier{
+public class CubicBezier{
 	//The control points for the Bezier curve in the form {{x1, x2, x3, x4}, {y1, y2, y3, y4}}
 	private double[][] controlPoints;
 	

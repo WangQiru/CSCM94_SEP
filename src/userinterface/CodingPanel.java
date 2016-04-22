@@ -1,7 +1,6 @@
 package userinterface;
 import java.awt.Panel;
 import java.awt.TextArea;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 

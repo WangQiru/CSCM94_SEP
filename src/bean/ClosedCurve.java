@@ -6,10 +6,12 @@ import java.awt.geom.Path2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import util.CubicBezier;
+
 public class ClosedCurve implements Node{
-	
+
 	private ArrayList<double[]> curvePoints;
-	
+
 	public ClosedCurve(ArrayList<double[]> curveSegmentList){
 		this.curvePoints = curveSegmentList;
 	}
@@ -59,7 +61,7 @@ public class ClosedCurve implements Node{
 	public boolean drawPixel(double x, double y) {		
 		//First generate a list of vertices from the points
 		ArrayList<double[]> vertexList = new ArrayList<double[]>();
-		
+
 		for (int i = 0; i < this.curvePoints.size(); ++i){
 			double[] segment = this.curvePoints.get(i);
 			//If segment is a Bezier curve, calculate appropriate line segments and add to vertexList
@@ -89,10 +91,10 @@ public class ClosedCurve implements Node{
 				vertexList.add(segment);
 			}
 		}
-				
+
 		//Close the curve by setting the final vertex to be equal to the first
 		vertexList.add(vertexList.get(0));
-		
+
 		//Calculate winding number for a point wrt. the curve
 		//This code adapted from http://geomalgorithms.com/a03-_inclusion.html
 		int winding = 0;
@@ -121,7 +123,7 @@ public class ClosedCurve implements Node{
 			return true;
 		}
 	}
-	
+
 	//Tests if a point (x,y) is to the left of an infinite line passing through points[]
 	//Returns >0 if the point is on the left, <0 if the point is on the right and 0 if the point is on the line
 	private double isLeft(double[] thisVertex, double[] nextVertex, double x, double y){

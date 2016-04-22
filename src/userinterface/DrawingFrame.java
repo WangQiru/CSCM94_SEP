@@ -14,28 +14,29 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
-import bean.Node;
 import util.LoadFile;
 import util.Parser;
 import util.SaveFile;
+import bean.Node;
 
 @SuppressWarnings("serial")
 public class DrawingFrame extends Frame {
 	public DrawingFrame(){
-		
+
 		//Horizontal spacing between elements
 		int spacingX = 30;
-		
+
 		//Vertical spacing between elements
 		int spacingY = 20;
-		
+
 		//Horizontal size of a button
 		int buttonX = 80;
-		
+
 		//Vertical size of a button
 		int buttonY = 30;
-		
+
 		setSize(900,700);
 		setVisible(true);
 		setLayout(null);
@@ -45,19 +46,19 @@ public class DrawingFrame extends Frame {
 		canvas.setBounds(spacingX, spacingY + 30, this.getWidth()/2 - (3*spacingX/2), this.getHeight() - (4*spacingY + 2*buttonY + 30));
 		canvas.setBackground(Color.white);
 		add(canvas);
-		
+
 		//Cheating to get a 1-pixel-wide border around the canvas by creating an all-black canvas behind it
 		DrawingPanel canvasOutline = new DrawingPanel();		
 		canvasOutline.setBounds(canvas.getX() - 1, canvas.getY() - 1, canvas.getWidth() + 2, canvas.getHeight() + 2);
 		canvasOutline.setBackground(Color.black);
 		add(canvasOutline);
-		
+
 		//The text box in which instructions will be entered
 		CodingPanel textBox = new CodingPanel();
 		textBox.setBounds(canvas.getWidth() + canvas.getX() + spacingX, canvas.getY(), canvas.getWidth(), canvas.getHeight());
 		textBox.textArea.setBounds(10, 10, textBox.getWidth() - 10, textBox.getHeight() - 10);
 		add(textBox);
-		
+
 		Button btnClear=new Button();
 		btnClear.setLabel("Clear");
 		btnClear.setBounds(spacingX, canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
@@ -86,10 +87,10 @@ public class DrawingFrame extends Frame {
 		colourChooser.setBounds(spacingX + canvas.getWidth()/2 - buttonX/2, canvas.getY() + canvas.getHeight() + spacingY, buttonX, 20);
 		colourChooser.select("Blue");
 		add(colourChooser);
-		
+
 		//Array storing the built-in Java colours as Color objects, for use with colour chooser dropdown
 		Color[] colourList = {Color.BLACK,Color.BLUE,Color.CYAN,Color.DARK_GRAY,Color.GRAY,Color.GREEN,Color.LIGHT_GRAY,Color.MAGENTA,Color.ORANGE,Color.PINK,Color.RED,Color.YELLOW};
-		
+
 		//Button for drawing pixel-by-pixel
 		Button btnDrawPixel = new Button();
 		btnDrawPixel.setLabel("Draw");
@@ -99,9 +100,21 @@ public class DrawingFrame extends Frame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Node rootNode = Parser.parse(textBox.getText());
-				if (rootNode == null){
-					//Drawing an error message if Parser.parse fails
-					canvas.drawError("Syntax Error"); 
+				ArrayList<String> errList=Parser.returnErrList();
+
+				if(errList.size()>0){
+					ErrorFrame error = new ErrorFrame();
+					error.setTitle("Error");
+
+					String helpText = "";
+
+					for(int i=0;i<errList.size();i++){
+						helpText+=errList.get(i)+" ' \n\n";
+					}
+
+					
+					error.init(helpText);
+				
 				}
 				else {
 					canvas.drawPixels(rootNode, colourList[colourChooser.getSelectedIndex()]);
@@ -118,12 +131,30 @@ public class DrawingFrame extends Frame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Node rootNode = Parser.parse(textBox.getText());
-				if (rootNode == null){
-					canvas.drawError("Syntax Error"); 
+				//				if (rootNode == null){
+				//					canvas.drawError("Syntax Error"); 
+				//				}
+				//				else {
+
+				ArrayList<String> errList=Parser.returnErrList();
+
+				if(errList.size()>0){
+					ErrorFrame error = new ErrorFrame();
+					error.setTitle("Error");
+
+					String helpText = "";
+
+					for(int i=0;i<errList.size();i++){
+						helpText+=errList.get(i)+" ' \n\n";
+					}
+
+				
+					error.init(helpText);
+				
 				}
-				else {
+				else
 					canvas.drawArea(rootNode, colourList[colourChooser.getSelectedIndex()]);
-				}
+				//				}
 			}
 		});
 
@@ -133,16 +164,16 @@ public class DrawingFrame extends Frame {
 		add(btnSave);
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-//				//Attempts to save text by creating a tree then printing it to a file
-//				Node rootNode = Parser.parse(textBox.getText());
-//				if (rootNode == null){
-//					//Drawing an error message if Parser.parse fails, so only valid trees can be saved
-//					canvas.drawError("Syntax Error"); 
-//				}
-//				//If an error ocurred, print it to the canvas
-//				else if(!FileIO.fileSave(rootNode.print())){
-//					canvas.drawError("File Save Error"); 
-//				}
+				//				//Attempts to save text by creating a tree then printing it to a file
+				//				Node rootNode = Parser.parse(textBox.getText());
+				//				if (rootNode == null){
+				//					//Drawing an error message if Parser.parse fails, so only valid trees can be saved
+				//					canvas.drawError("Syntax Error"); 
+				//				}
+				//				//If an error ocurred, print it to the canvas
+				//				else if(!FileIO.fileSave(rootNode.print())){
+				//					canvas.drawError("File Save Error"); 
+				//				}
 				SaveFile sf = new SaveFile(textBox.getText());
 			}
 		});
@@ -153,17 +184,17 @@ public class DrawingFrame extends Frame {
 		add(btnLoad);
 		btnLoad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-//				String fileContents = FileIO.fileLoad();
-//				
-//				//If an error ocurred, print it to the canvas
-//				if(fileContents == null){
-//					canvas.drawError("File Read Error");
-//				}
-//				//If the user did not cancel loading, or did not load an empty file, print the contents of the
-//				//file to the text box
-//				else if (fileContents != ""){
-//					textBox.setText(fileContents);
-//				}
+				//				String fileContents = FileIO.fileLoad();
+				//				
+				//				//If an error ocurred, print it to the canvas
+				//				if(fileContents == null){
+				//					canvas.drawError("File Read Error");
+				//				}
+				//				//If the user did not cancel loading, or did not load an empty file, print the contents of the
+				//				//file to the text box
+				//				else if (fileContents != ""){
+				//					textBox.setText(fileContents);
+				//				}
 				LoadFile lf = new LoadFile();
 				textBox.setText(lf.getContent());
 			}
@@ -179,9 +210,9 @@ public class DrawingFrame extends Frame {
 				help.setTitle("Help");
 			}
 		});
-		
+
 		Checkbox cbAutoComplete=new Checkbox("Auto-Complete brackets");
-		cbAutoComplete.setBounds(2*spacingX + canvas.getWidth(), canvas.getY() + canvas.getHeight() + 4*spacingY, 2*buttonX, buttonY);
+		cbAutoComplete.setBounds(2*spacingX + canvas.getWidth(),  canvas.getY() + canvas.getHeight() + 2*spacingY + buttonY, 2*buttonX, buttonY);
 		cbAutoComplete.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
@@ -210,12 +241,12 @@ public class DrawingFrame extends Frame {
 				else{
 					textBox.textArea.removeKeyListener(textBox.textArea.getKeyListeners()[0]);
 				}
-				
+
 			}
 		});
 		add(cbAutoComplete);
-		
-		
+
+
 		//Dynamically resizing and repositioning window elements on window resize
 		addComponentListener(new ComponentAdapter(){
 			public void componentResized(ComponentEvent e){
@@ -230,11 +261,11 @@ public class DrawingFrame extends Frame {
 				btnLoad.setBounds(2*canvas.getWidth() + canvas.getX() + spacingX - buttonX, canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
 				btnSave.setBounds(2*spacingX + canvas.getWidth(), canvas.getY() + canvas.getHeight() + spacingY, buttonX, buttonY);
 				btnHelp.setBounds(2*canvas.getWidth() + canvas.getX() + spacingX - buttonX, canvas.getY() + canvas.getHeight() + 2*spacingY + buttonY, buttonX, buttonY);
-				cbAutoComplete.setBounds(2*spacingX + canvas.getWidth(), canvas.getY() + canvas.getHeight() + spacingY, 2*buttonX, buttonY);
+				cbAutoComplete.setBounds(2*spacingX + canvas.getWidth(),  canvas.getY() + canvas.getHeight() + 2*spacingY + buttonY, 2*buttonX, buttonY);
 			}
 		});
-		
-		
+
+
 
 
 		addWindowListener(new WindowAdapter(){
