@@ -109,7 +109,7 @@ public class DrawingFrame extends Frame {
 					String helpText = "";
 
 					for(int i=0;i<errList.size();i++){
-						helpText+=errList.get(i)+" ' \n\n";
+						helpText+= (i+1) + ". " + errList.get(i)+" \n\n";
 					}
 
 					
@@ -131,11 +131,6 @@ public class DrawingFrame extends Frame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Node rootNode = Parser.parse(textBox.getText());
-				//				if (rootNode == null){
-				//					canvas.drawError("Syntax Error"); 
-				//				}
-				//				else {
-
 				ArrayList<String> errList=Parser.returnErrList();
 
 				if(errList.size()>0){
@@ -145,7 +140,7 @@ public class DrawingFrame extends Frame {
 					String helpText = "";
 
 					for(int i=0;i<errList.size();i++){
-						helpText+=errList.get(i)+" ' \n\n";
+						helpText+= (i+1) + ". " + errList.get(i)+" \n\n";
 					}
 
 				
@@ -164,16 +159,6 @@ public class DrawingFrame extends Frame {
 		add(btnSave);
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//				//Attempts to save text by creating a tree then printing it to a file
-				//				Node rootNode = Parser.parse(textBox.getText());
-				//				if (rootNode == null){
-				//					//Drawing an error message if Parser.parse fails, so only valid trees can be saved
-				//					canvas.drawError("Syntax Error"); 
-				//				}
-				//				//If an error ocurred, print it to the canvas
-				//				else if(!FileIO.fileSave(rootNode.print())){
-				//					canvas.drawError("File Save Error"); 
-				//				}
 				SaveFile sf = new SaveFile(textBox.getText());
 			}
 		});
@@ -184,17 +169,6 @@ public class DrawingFrame extends Frame {
 		add(btnLoad);
 		btnLoad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				//				String fileContents = FileIO.fileLoad();
-				//				
-				//				//If an error ocurred, print it to the canvas
-				//				if(fileContents == null){
-				//					canvas.drawError("File Read Error");
-				//				}
-				//				//If the user did not cancel loading, or did not load an empty file, print the contents of the
-				//				//file to the text box
-				//				else if (fileContents != ""){
-				//					textBox.setText(fileContents);
-				//				}
 				LoadFile lf = new LoadFile();
 				textBox.setText(lf.getContent());
 			}
@@ -221,19 +195,16 @@ public class DrawingFrame extends Frame {
 					textBox.textArea.addKeyListener(new KeyAdapter() {
 						public void keyTyped(KeyEvent e) {
 							if (e.getKeyChar()=='(') {
+								int newlines = 0;
+								String text = textBox.textArea.getText();
+								for (int i = 0; i < textBox.textArea.getCaretPosition() ; ++i){
+									if (text.charAt(i) == '\r'){
+										++newlines;				
+									}
+								}
 								e.consume();
-								textBox.textArea.insert("()", textBox.textArea.getCaretPosition());
-								textBox.textArea.setCaretPosition(textBox.textArea.getCaretPosition()-1);
-							}
-							if (e.getKeyChar()=='{') {
-								e.consume();
-								textBox.textArea.insert("{}", textBox.textArea.getCaretPosition());
-								textBox.textArea.setCaretPosition(textBox.textArea.getCaretPosition()-1);
-							}
-							if (e.getKeyChar()=='[') {
-								e.consume();
-								textBox.textArea.insert("[]", textBox.textArea.getCaretPosition());
-								textBox.textArea.setCaretPosition(textBox.textArea.getCaretPosition()-1);
+								textBox.textArea.insert("()", textBox.textArea.getCaretPosition() - newlines);
+								textBox.textArea.setCaretPosition(textBox.textArea.getCaretPosition() - (newlines + 1));
 							}
 						}
 					});

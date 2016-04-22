@@ -53,9 +53,13 @@ public class Translate extends Transform {
 
 	@Override
 	public Area draw() {
-		AffineTransform translate = AffineTransform.getTranslateInstance(this.distanceX, this.distanceY);
-		Area translatedArea = new Area(this.inputNode.draw());
-		translatedArea.transform(translate);
+		Area initialArea = new Area(this.inputNode.draw());
+		Area translatedArea = new Area();
+		for (int i = 0; i < this.repeat; ++i){
+			AffineTransform translate = AffineTransform.getTranslateInstance(this.distanceX, this.distanceY);
+			initialArea.transform(translate);
+			translatedArea.add(initialArea);
+		}
 		return translatedArea;
 	}
 

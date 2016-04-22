@@ -25,7 +25,7 @@ public class Parser {
 		ArrayList<String> argList = getArgList(instructions);
 
 		if(argList==null){
-			errList.add("Oops, you must've forgentten to enter a opening/closing bracket !");
+			errList.add("Oops, you must've forgentten to enter an opening/closing bracket !");
 		}
 		else{
 			//Recursively creating the required nodes
@@ -35,10 +35,10 @@ public class Parser {
 					if(checkDouble(argList.get(0)))
 						return new Square(Double.parseDouble(argList.get(0)));
 					else
-						errList.add("You have entered wrong format of arguments for ' "+instructions);
+						errList.add("You have entered wrong format of arguments for \""+instructions+"\"");
 				}
 				else
-					errList.add("You have entered wrong number of arguments for ' "+instructions);
+					errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 			}
 
 			else if (instructions.startsWith("Rectangle(")){
@@ -46,10 +46,10 @@ public class Parser {
 					if(checkDouble(argList.get(0))&&checkDouble(argList.get(1)))
 						return new Rectangle(Double.parseDouble(argList.get(0)), Double.parseDouble(argList.get(1)));
 					else
-						errList.add("You have entered wrong format of arguments for ' "+instructions);
+						errList.add("You have entered wrong format of arguments for \""+instructions+"\"");
 				}
 				else
-				errList.add("You have entered wrong number of arguments for ' "+instructions);
+				errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 			}
 
 			else if (instructions.startsWith("Triangle(")){		
@@ -57,10 +57,10 @@ public class Parser {
 					if(checkDouble(argList.get(0)))
 						return new Triangle(Double.parseDouble(argList.get(0)));
 					else
-						errList.add("You have entered wrong format of arguments for ' "+instructions);
+						errList.add("You have entered wrong format of arguments for \""+instructions+"\"");
 				}
 				else
-					errList.add("You have entered wrong number of arguments for ' "+instructions);
+					errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 			}
 
 			else if (instructions.startsWith("Circle(")){
@@ -68,13 +68,13 @@ public class Parser {
 					if(checkDouble(argList.get(0)))
 						return new Circle(Double.parseDouble(argList.get(0)));
 					else
-						errList.add("You have entered wrong format of arguments for ' "+instructions);
+						errList.add("You have entered wrong format of arguments for \""+instructions+"\"");
 				}
 				else
-				errList.add("You have entered wrong number of arguments for ' "+instructions);
+				errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 			}
 
-			//A curve segment is defined by 4 points, each with an x and y value (8 values total)
+			//A curve segment is defined by 4 points, each with an x and y value (8 values total) or 1 point wit an x ad y value (2 values total)
 			//A curve is a sequence of one or more curve segments
 			else if (instructions.startsWith("Curve(")){
 
@@ -89,16 +89,16 @@ public class Parser {
 						ArrayList<String> argList2 = getArgList(argList.get(i));
 						double[] curvePoints = new double[argList2.size()];
 						for (int j = 0; j < argList2.size(); ++j){
-							if (checkArgSize(argList.size(),2,false)&&checkArgSize(argList.size(),8,false)){
+							if (checkArgSize(argList2.size(),2,true)||checkArgSize(argList2.size(),8,true)){
 								if(checkDouble(argList2.get(j)))
 									curvePoints[j] = Double.parseDouble(argList2.get(j));
 								else{
-									errList.add("You have entered wrong format of arguments for ' "+instructions);
+									errList.add("You have entered wrong format of arguments for \""+instructions+"\"");
 									break;
 								}
 							}
 							else{
-								errList.add("You have entered wrong number of arguments for ' "+instructions);
+								errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 								break;
 							}
 						}
@@ -110,16 +110,16 @@ public class Parser {
 				else{
 					double[] curvePoints = new double[argList.size()];
 					for (int i = 0; i < argList.size(); ++i){
-						if (checkArgSize(argList.size(),2,false)&&checkArgSize(argList.size(),8,false)){
+						if (checkArgSize(argList.size(),8,true)){
 							if(checkDouble(argList.get(i)))
 								curvePoints[i] = Double.parseDouble(argList.get(i));
 							else{
-								errList.add("You have entered wrong format of arguments for ' "+instructions);
+								errList.add("You have entered wrong format of arguments for \""+instructions+"\"");
 								break;
 							}
 						}
 						else{
-							errList.add("You have entered wrong number of arguments for ' "+instructions);
+							errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 							break;
 						}
 					}
@@ -136,10 +136,10 @@ public class Parser {
 					if (checkDouble(argList.get(1)) && checkInteger(argList.get(2)))
 						return new Rotate(parse(argList.get(0)),Double.parseDouble(argList.get(1)),Integer.parseInt(argList.get(2)));
 					else
-						errList.add("You have entered wrong format of arguments for ' "+instructions);
+						errList.add("You have entered wrong format of arguments for \""+instructions+"\"");
 				}
 				else
-				errList.add("You have entered wrong number of arguments for ' "+instructions);
+				errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 			}
 
 			else if (instructions.startsWith("Rotate(")){
@@ -147,10 +147,10 @@ public class Parser {
 					if(checkDouble(argList.get(1)))
 						return new Rotate(parse(argList.get(0)),Double.parseDouble(argList.get(1)));
 					else
-						errList.add("You have entered wrong format of arguments for ' "+instructions);
+						errList.add("You have entered wrong format of arguments for \""+instructions+"\"");
 				}
 				else
-				errList.add("You have entered wrong number of arguments for ' "+instructions);
+				errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 			}
 
 			else if (instructions.startsWith("TranslateN(")){
@@ -158,10 +158,10 @@ public class Parser {
 					if (checkDouble(argList.get(1)) && checkDouble(argList.get(2)) && checkInteger(argList.get(3)))
 						return new Translate(parse(argList.get(0)),Double.parseDouble(argList.get(1)), Double.parseDouble(argList.get(2)),Integer.parseInt(argList.get(3)));
 					else
-						errList.add("You have entered wrong format of arguments for ' "+instructions);
+						errList.add("You have entered wrong format of arguments for \""+instructions+"\"");
 				}
 				else
-				errList.add("You have entered wrong number of arguments for ' "+instructions);
+				errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 			}
 
 			else if (instructions.startsWith("Translate(")){
@@ -169,10 +169,10 @@ public class Parser {
 					if (checkDouble(argList.get(1)) && checkDouble(argList.get(2)))
 						return new Translate(parse(argList.get(0)),Double.parseDouble(argList.get(1)), Double.parseDouble(argList.get(2)));
 					else
-						errList.add("You have entered wrong format of arguments for ' "+instructions);
+						errList.add("You have entered wrong format of arguments for \""+instructions+"\"");
 				}
 				else
-				errList.add("You have entered wrong number of arguments for ' "+instructions);
+				errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 			}
 
 			else if (instructions.startsWith("ScaleN(")){
@@ -181,16 +181,16 @@ public class Parser {
 					if (checkDouble(argList.get(1)) && checkInteger(argList.get(2)))
 						return new Scale(parse(argList.get(0)),Double.parseDouble(argList.get(1)), Double.parseDouble(argList.get(1)),Integer.parseInt(argList.get(2)));
 					else
-						errList.add("You have entered wrong format of arguments for ' "+instructions);
+						errList.add("You have entered wrong format of arguments for \""+instructions+"\"");
 				}	
 				else if (argList.size() == 4){
 					if (checkDouble(argList.get(1)) && checkDouble(argList.get(2)) && checkInteger(argList.get(3)))
 						return new Scale(parse(argList.get(0)),Double.parseDouble(argList.get(1)), Double.parseDouble(argList.get(2)),Integer.parseInt(argList.get(3)));
 					else
-						errList.add("You have entered wrong format of arguments for ' "+instructions);
+						errList.add("You have entered wrong format of arguments for \""+instructions+"\"");
 				}
 				else
-				errList.add("You have entered wrong number of arguments for ' "+instructions);
+				errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 			}
 
 			else if (instructions.startsWith("Scale(")){
@@ -198,16 +198,16 @@ public class Parser {
 					if (checkDouble(argList.get(1)))
 						return new Scale(parse(argList.get(0)),Double.parseDouble(argList.get(1)), Double.parseDouble(argList.get(1)));
 					else
-						errList.add("You have entered wrong format of arguments for ' "+instructions);
+						errList.add("You have entered wrong format of arguments for \""+instructions+"\"");
 				}
 				else if (argList.size() == 3){
 					if (checkDouble(argList.get(1)) && checkDouble(argList.get(2)))
 						return new Scale(parse(argList.get(0)),Double.parseDouble(argList.get(1)), Double.parseDouble(argList.get(2)));
 					else
-						errList.add("You have entered wrong format of arguments for ' "+instructions);
+						errList.add("You have entered wrong format of arguments for \""+instructions+"\"");
 				}
 				else
-				errList.add("You have entered wrong number of arguments for ' "+instructions);
+				errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 			}
 
 			//MIXES
@@ -222,7 +222,7 @@ public class Parser {
 					return new Union(mixNodes);
 				}
 				else
-				errList.add("You have entered wrong number of arguments for ' "+instructions);
+				errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 			}
 
 			else if (instructions.startsWith("Intersection(")){
@@ -234,7 +234,7 @@ public class Parser {
 					return new Intersection(mixNodes);					
 				}
 				else
-				errList.add("You have entered wrong number of arguments for ' "+instructions);	
+				errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 			}
 
 			else if (instructions.startsWith("Difference(")){
@@ -246,10 +246,10 @@ public class Parser {
 					return new Difference(mixNodes);
 				}
 				else
-				errList.add("You have entered wrong number of arguments for ' "+instructions);
+				errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 			}
 			else
-				errList.add("You have a syntax error near ' "+instructions.substring(0, Math.min(12,Math.min(instructions.length(),instructions.indexOf('(')))));
+				errList.add("You have a syntax error near \""+instructions.substring(0, Math.min(12,Math.min(instructions.length(),instructions.indexOf('('))))+"\"");
 		}
 		return null;
 	}
@@ -261,7 +261,7 @@ public class Parser {
 
 	private static ArrayList<String> getArgList(String instructions){
 		ArrayList<String> argList = new ArrayList<String>();
-		if(check(instructions)){
+		if(checkBrackets(instructions)){
 			//Creating a substring of whatever is contained within the outermost pair of brackets
 			String argument = instructions.substring(instructions.indexOf('(') + 1,instructions.lastIndexOf(')'));
 			int endIndex = argument.length() - 1;
@@ -341,7 +341,7 @@ public class Parser {
 			return false;
 		}		
 	}
-	public static boolean check(String str){
+	public static boolean checkBrackets(String str){
 		if (str.trim().length() == 0){
 			return false;
 		}

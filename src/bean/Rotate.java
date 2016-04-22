@@ -50,9 +50,13 @@ public class Rotate extends Transform {
 
 	@Override
 	public Area draw() {
-		AffineTransform rotate = AffineTransform.getRotateInstance(this.angle);
-		Area rotatedArea = new Area(this.inputNode.draw());
-		rotatedArea.transform(rotate);
+		Area initialArea = new Area(this.inputNode.draw());
+		Area rotatedArea = new Area();
+		for (int i = 0; i < this.repeat; ++i){
+			AffineTransform rotate = AffineTransform.getRotateInstance(this.angle);
+			initialArea.transform(rotate);
+			rotatedArea.add(initialArea);
+		}
 		return rotatedArea;
 	}
 

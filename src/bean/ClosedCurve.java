@@ -48,8 +48,12 @@ public class ClosedCurve implements Node{
 				//Add that curve to the existing path
 				path.append(curve, true);
 			}
+			//If the current segment is the first point in the curve, add a line to that point to the path
+			else if (i == 0){
+				path.moveTo(segment[0], segment[1]);
+			}
 			//If the current segment is a point, add a line to that point to the path
-			else{
+			else {
 				path.lineTo(segment[0], segment[1]);
 			}
 		}

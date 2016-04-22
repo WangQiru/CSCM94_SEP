@@ -21,7 +21,7 @@ public class Scale extends Transform {
 		this.repeat = repeat;
 	}
 
-	
+
 	@Override
 	public boolean deleteNode() {
 		// TODO Auto-generated method stub
@@ -57,9 +57,13 @@ public class Scale extends Transform {
 
 	@Override
 	public Area draw() {
-		AffineTransform scale = AffineTransform.getScaleInstance(this.factorX, this.factorY);
-		Area scaledArea = new Area(this.inputNode.draw());
-		scaledArea.transform(scale);
+		Area initialArea = new Area(this.inputNode.draw());
+		Area scaledArea = new Area();
+		for (int i = 0; i < this.repeat; ++i){
+			AffineTransform scale = AffineTransform.getScaleInstance(this.factorX, this.factorY);
+			initialArea.transform(scale);
+			scaledArea.add(initialArea);
+		}
 		return scaledArea;
 	}
 

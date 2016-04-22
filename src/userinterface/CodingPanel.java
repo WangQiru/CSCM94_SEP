@@ -14,26 +14,6 @@ public class CodingPanel extends Panel {
 		add(textArea);
 	}
 
-	public void keyTyped(KeyEvent e) {
-		if (e.getKeyChar()=='(') {
-			e.consume();
-			textArea.insert("()", textArea.getCaretPosition());
-			textArea.setCaretPosition(textArea.getCaretPosition()-1);
-		}
-		if (e.getKeyChar()=='{') {
-			e.consume();
-			textArea.insert("{}", textArea.getCaretPosition());
-			textArea.setCaretPosition(textArea.getCaretPosition()-1);
-		}
-		if (e.getKeyChar()=='[') {
-			e.consume();
-			textArea.insert("[]", textArea.getCaretPosition());
-			textArea.setCaretPosition(textArea.getCaretPosition()-1);
-		}
-
-		textArea.addKeyListener((KeyListener) this);
-	}
-
 	public String getText(){
 		return textArea.getText();
 	}
