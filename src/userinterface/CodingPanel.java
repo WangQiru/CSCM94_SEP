@@ -1,8 +1,15 @@
 package userinterface;
 import java.awt.Panel;
 import java.awt.TextArea;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+
+/**
+ * 	@class CodingPanel
+ *	This CodingPanel class serves as a panel of DrawingFrame.
+ *
+ *  @author Donal Evans
+ *  @author Qiru Wang
+ */
+
 
 @SuppressWarnings("serial")
 public class CodingPanel extends Panel {

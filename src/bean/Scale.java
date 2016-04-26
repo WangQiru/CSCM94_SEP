@@ -2,6 +2,14 @@ package bean;
 
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
+/**
+ * 	@class Scale
+ *	This Scale class serves as an object.
+ *	Is inherited from Transform.
+ *
+ *  @author Donal Evans
+ *  @author Qiru Wang
+ */
 
 public class Scale extends Transform {
 	public double factorX;

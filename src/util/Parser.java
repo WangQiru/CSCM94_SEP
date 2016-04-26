@@ -14,6 +14,13 @@ import bean.Square;
 import bean.Translate;
 import bean.Triangle;
 import bean.Union;
+/**
+ * 	@class Parser
+ *	This Parser class contains all methods for parsing user commands
+ *
+ *  @author Donal Evans
+ *  @author Qiru Wang
+ */
 
 public class Parser {
 	private static ArrayList<String> errList = new ArrayList<String>();

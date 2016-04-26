@@ -5,6 +5,13 @@ import java.awt.Frame;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+/**
+ * 	@class SaveFile
+ *	This SaveFile class initializes a FileDialog for saving existing drawing into a file.
+ *
+ *  @author Donal Evans
+ *  @author Qiru Wang
+ */
 
 public class SaveFile extends Frame {
 	public SaveFile(String commands) {

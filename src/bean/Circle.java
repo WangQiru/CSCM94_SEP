@@ -2,6 +2,14 @@ package bean;
 
 import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
+/**
+ * 	@class Circle
+ *	This Circle class serves as an object.
+ *	Is inherited from Shape.
+ *
+ *  @author Donal Evans
+ *  @author Qiru Wang
+ */
 
 public class Circle extends Shape {
 	

@@ -20,6 +20,13 @@ import util.LoadFile;
 import util.Parser;
 import util.SaveFile;
 import bean.Node;
+/**
+ * 	@class DrawingFrame
+ *	This DrawingFrame class serves as the main frame of this program.
+ *
+ *  @author Donal Evans
+ *  @author Qiru Wang
+ */
 
 @SuppressWarnings("serial")
 public class DrawingFrame extends Frame {

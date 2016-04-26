@@ -1,7 +1,14 @@
 package bean;
-
 import java.awt.Polygon;
 import java.awt.geom.Area;
+/**
+ * 	@class Rectangle
+ *	This Rectangle class serves as an object.
+ *	Is inherited from Shape.
+ *
+ *  @author Donal Evans
+ *  @author Qiru Wang
+ */
 
 public class Rectangle extends Shape {
 	

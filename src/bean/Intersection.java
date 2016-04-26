@@ -2,6 +2,14 @@ package bean;
 
 import java.awt.geom.Area;
 import java.util.ArrayList;
+/**
+ * 	@class Intersection
+ *	This Intersection class serves as an object.
+ *	Is inherited from Mix.
+ *
+ *  @author Donal Evans
+ *  @author Qiru Wang
+ */
 
 public class Intersection extends Mix {
 	public Intersection(ArrayList<Node> inputNodes){

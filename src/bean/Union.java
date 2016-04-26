@@ -2,6 +2,14 @@ package bean;
 
 import java.awt.geom.Area;
 import java.util.ArrayList;
+/**
+ * 	@class Union
+ *	This Union class serves as an object.
+ *	Is inherited from Mix.
+ *
+ *  @author Donal Evans
+ *  @author Qiru Wang
+ */
 
 public class Union extends Mix {
 	public Union(ArrayList<Node> inputNodes){

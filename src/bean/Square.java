@@ -2,6 +2,14 @@ package bean;
 
 import java.awt.Polygon;
 import java.awt.geom.Area;
+/**
+ * 	@class Square
+ *	This Square class serves as an object.
+ *	Is inherited from Shape.
+ *
+ *  @author Donal Evans
+ *  @author Qiru Wang
+ */
 
 public class Square extends Shape {
 

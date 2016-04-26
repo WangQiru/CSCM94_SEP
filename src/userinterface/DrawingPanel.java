@@ -9,6 +9,14 @@ import java.awt.image.BufferedImage;
 
 import bean.Node;
 
+/**
+ * 	@class DrawingPanel
+ *	This DrawingPanel class serves as a panel of DrawingFrame.
+ *
+ *  @author Donal Evans
+ *  @author Qiru Wang
+ */
+
 @SuppressWarnings("serial")
 public class DrawingPanel extends Panel {
 	

@@ -1,4 +1,11 @@
 package util;
+/**
+ * 	@class CubicBezier
+ *	This CubicBezier class .....
+ *
+ *  @author Donal Evans
+ *  @author Qiru Wang
+ */
 
 import java.awt.geom.CubicCurve2D;
 import java.util.ArrayList;

@@ -7,6 +7,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import util.CubicBezier;
+/**
+ * 	@class ClosedCurve
+ *	This ClosedCurve class serves as an implementation of Node.
+ *
+ *  @author Donal Evans
+ *  @author Qiru Wang
+ */
 
 public class ClosedCurve implements Node{
 
