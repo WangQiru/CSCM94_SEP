@@ -14,6 +14,12 @@ import java.io.IOException;
  */
 
 public class SaveFile extends Frame {
+
+	/**
+	 * Save the user commands into a .draw file
+	 * @param commands the user commands
+	 */
+
 	public SaveFile(String commands) {
 		FileDialog fc=new FileDialog(this,"Save to a file",1);
 		fc.setVisible(true);

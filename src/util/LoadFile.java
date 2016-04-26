@@ -24,6 +24,10 @@ public class LoadFile extends Frame {
 		this.content = content;
 	}
 
+	/**
+	 * Load the user commands from a .draw file.
+	 */
+	
 	public LoadFile() {
 		FileDialog fc=new FileDialog(this,"Load from a file",0);
 		fc.setFile("*.draw");
@@ -45,10 +49,5 @@ public class LoadFile extends Frame {
 				System.err.format("IOException: %s%n", x);
 			}
 		}
-	}
-
-
-	public static void main(String[] args) {
-
 	}
 }

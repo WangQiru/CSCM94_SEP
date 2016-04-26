@@ -24,6 +24,13 @@ import bean.Union;
 
 public class Parser {
 	private static ArrayList<String> errList = new ArrayList<String>();
+	
+	/**
+	 * Parse user input into Nodes
+	 * @param input the user input 
+	 * @return return a Node
+	 */
+	
 	public static Node parse(String input){
 		//Removing all newlines, tabs and whitespace from input string
 		String instructions = input.replaceAll("\n", "").replaceAll("\t", "").replaceAll(" ", "").replaceAll("\r", "");
@@ -260,12 +267,25 @@ public class Parser {
 		}
 		return null;
 	}
+	
+	/**
+	 * 
+	 * Store error occurred when parsing the user input instructions
+	 * 
+	 */
+	
 	public static ArrayList<String> returnErrList(){
 		ArrayList<String> temp=new ArrayList<String>(errList);
 		errList.clear();
 		return temp;
 	}
 
+	
+	/**
+	 * Split the user input instructions into a well-formatted ArrayList 
+	 * @param instructions the user input instructions
+	 * @return return an ArrayList of String for formatted instructions
+	 */
 	private static ArrayList<String> getArgList(String instructions){
 		ArrayList<String> argList = new ArrayList<String>();
 		if(checkBrackets(instructions)){
@@ -315,21 +335,34 @@ public class Parser {
 			return null;
 	}
 
-
-	public static boolean checkArgSize(int argSize,int size, boolean fixedArg){
-		if(fixedArg){
-			if (argSize!=size)
+	/**
+	 * Check if the number of parameters is correct
+	 * @param inputSize the number of user input parameters
+	 * @param correctSize the correct number of parameter for the Node type
+	 * @param fixedArgSize if he number of parameters for the Node type should be fixed
+	 * @return return true if the number of parameters is correct
+	 */
+	
+	public static boolean checkArgSize(int inputSize,int correctSize, boolean fixedArgSize){
+		if(fixedArgSize){
+			if (inputSize!=correctSize)
 				return false;
 		}
 		else
-			if(argSize<size)
+			if(inputSize<correctSize)
 				return false;
 		return true;		
 	}
-	public static boolean checkInteger(String text){
+	
+	/**
+	 * Check if the parameter is parsable to Integer
+	 * @param str the user input parameter
+	 * @return return true if the parameter if parsable
+	 */
+	public static boolean checkInteger(String str){
 		try
 		{
-			Integer.parseInt(text);
+			Integer.parseInt(str);
 			return true;
 		}
 		catch( Exception e)
@@ -337,10 +370,17 @@ public class Parser {
 			return false;
 		}
 	}
-	public static boolean checkDouble(String text){
+	
+	/**
+	 * Check if the parameter is parsable to Double
+	 * @param str the user input parameter
+	 * @return return true if the parameter if parsable
+	 */
+	
+	public static boolean checkDouble(String str){
 		try
 		{
-			Double.parseDouble(text);
+			Double.parseDouble(str);
 			return true;
 		}
 		catch( Exception e)
@@ -348,6 +388,13 @@ public class Parser {
 			return false;
 		}		
 	}
+	
+	/**
+	 * Parse user input into Nodes
+	 * @param str the formatted input 
+	 * @return return true if the number of brackets is correct
+	 */
+	
 	public static boolean checkBrackets(String str){
 		if (str.trim().length() == 0){
 			return false;
