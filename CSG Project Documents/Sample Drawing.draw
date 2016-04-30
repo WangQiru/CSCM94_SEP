@@ -8,7 +8,8 @@ Union(
 			),
 		0,-15),
 		Translate(Circle(18),-35,20),
-		Translate(Circle(18),35,20)
+		Translate(Circle(18),35,20),
+		Translate(Triangle(18),0,-20)
 	),
 
 	Translate(
