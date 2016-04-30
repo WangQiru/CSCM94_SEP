@@ -13,6 +13,7 @@ import java.io.IOException;
  *  @author Qiru Wang
  */
 
+@SuppressWarnings("serial")
 public class SaveFile extends Frame {
 
 	/**

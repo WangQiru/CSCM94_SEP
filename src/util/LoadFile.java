@@ -14,6 +14,7 @@ import java.io.IOException;
  *  @author Qiru Wang
  */
 
+@SuppressWarnings("serial")
 public class LoadFile extends Frame {
 	private String content;
 	public String getContent() {
