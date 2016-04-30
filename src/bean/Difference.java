@@ -40,7 +40,7 @@ public class Difference extends Mix {
 	public boolean drawPixel(double x, double y) {
 		boolean subtractedNodes = false;
 		for (int i = 1; i < this.inputNodes.size(); ++i){
-			subtractedNodes = this.inputNodes.get(i).drawPixel(x, y);
+			subtractedNodes = subtractedNodes || this.inputNodes.get(i).drawPixel(x, y);
 		}
 		return (this.inputNodes.get(0).drawPixel(x, y) && !subtractedNodes);
 	}

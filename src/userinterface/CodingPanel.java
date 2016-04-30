@@ -14,7 +14,7 @@ import java.awt.TextArea;
 @SuppressWarnings("serial")
 public class CodingPanel extends Panel {
 
-	public TextArea textArea = new TextArea("Triangle(100)", 0, 0, TextArea.SCROLLBARS_NONE);
+	public TextArea textArea = new TextArea("Triangle(100)", 0, 0, TextArea.SCROLLBARS_VERTICAL_ONLY);
 
 	public CodingPanel(){
 		setLayout(null);

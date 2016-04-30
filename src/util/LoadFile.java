@@ -42,7 +42,7 @@ public class LoadFile extends Frame {
 				String line = null;
 				String commands = "";
 				while ((line = bufferedReader.readLine()) != null) {
-					commands+=line;
+					commands+=line + "\n";
 				}
 				bufferedReader.close();
 				this.setContent(commands);
