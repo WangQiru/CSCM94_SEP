@@ -1,6 +1,12 @@
 package bean;
-
 import java.awt.geom.Area;
+/**
+ * 	@class Node
+ *	This Node class serves as an interface.
+ *
+ *  @author Donal Evans
+ *  @author Qiru Wang
+ */
 
 public interface Node{
 	public boolean deleteNode();
@@ -9,5 +15,5 @@ public interface Node{
 	
 	public Area draw();
 
-	public void drawPixel(int x, int y);
+	public boolean drawPixel(double x, double y);
 }

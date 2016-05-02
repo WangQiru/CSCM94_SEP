@@ -2,6 +2,14 @@ package bean;
 
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
+/**
+ * 	@class Scale
+ *	This Scale class serves as an object.
+ *	Is inherited from Transform.
+ *
+ *  @author Donal Evans
+ *  @author Qiru Wang
+ */
 
 public class Scale extends Transform {
 	public double factorX;
@@ -11,60 +19,59 @@ public class Scale extends Transform {
 		this.inputNode=inputNode;
 		this.factorX=factorX;
 		this.factorY=factorY;
-	}
-	
-	public Scale(Node inputNode, double factor){
-		this.inputNode=inputNode;
-		this.factorX=factor;
-		this.factorY=factor;
+		this.repeat = 1;
 	}
 
-	
+	public Scale(Node inputNode, double factorX, double factorY, int repeat){
+		this.inputNode=inputNode;
+		this.factorX=factorX;
+		this.factorY=factorY;
+		this.repeat = repeat;
+	}
+
+
 	@Override
 	public boolean deleteNode() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-
-	@Override
-	public void repeat() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	@Override
 	public Node getInputNode() {
-		// TODO Auto-generated method stub
 		return this.inputNode;
 	}
 
-	
-
-
 	@Override
 	public String print() {
+		String output = "Scale(" + this.inputNode.print() + "," + this.factorX;
 		if (this.factorX != this.factorY){
-			return "Scale(" + this.inputNode.print() + "," + this.factorX + "," + this.factorY + ")";
+			output.concat("," + this.factorY);
 		}
-		else{
-			return "Scale(" + this.inputNode.print() + "," + this.factorX + ")";
+		if (this.repeat != 1){
+			output.concat("," + this.repeat);
+			output.replaceFirst("Scale", "ScaleN");
 		}
+		return output.concat(")");
 	}
 
-
-
 	@Override
-	public void drawPixel(int x, int y) {
-		// TODO Auto-generated method stub
-		
+	public boolean drawPixel(double x, double y) {
+		boolean inShape = false;
+		for (int i = 0; i < this.repeat; ++i){
+			inShape = inShape || (this.inputNode.drawPixel(x/Math.pow(this.factorX,i+1), y/Math.pow(this.factorY,i+1)));
+		}
+		return inShape;
 	}
 
 	@Override
 	public Area draw() {
-		AffineTransform scale = AffineTransform.getScaleInstance(this.factorX, this.factorY);
-		Area scaledArea = new Area(this.inputNode.draw());
-		scaledArea.transform(scale);
+		Area initialArea = new Area(this.inputNode.draw());
+		Area scaledArea = new Area();
+		for (int i = 0; i < this.repeat; ++i){
+			AffineTransform scale = AffineTransform.getScaleInstance(this.factorX, this.factorY);
+			initialArea.transform(scale);
+			scaledArea.add(initialArea);
+		}
 		return scaledArea;
 	}
 
