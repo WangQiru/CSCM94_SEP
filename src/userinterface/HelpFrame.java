@@ -26,7 +26,7 @@ public class HelpFrame extends Frame {
 		int spacingY = 20;
 		int buttonX = 80;
 		int buttonY = 30;
-		
+
 		String helpText = "Syntax for inputting instructions:\n \n"
 				+ "SHAPES\n"
 				+ "Square(radius)\n"
@@ -54,12 +54,12 @@ public class HelpFrame extends Frame {
 				+ "Difference(Node, Node, Node,...)\n \n"
 				+ "Example: Difference(Rotate(Square(50),45),Triangle(45))\n"
 				+ "Produces the Difference of a Square that has been rotated 45 degrees and a Triangle.";
-		
+
 		TextArea textArea = new TextArea(helpText, 0, 0, TextArea.SCROLLBARS_NONE);
 		textArea.setEditable(false);
 		textArea.setBounds(spacingX, 2*spacingY, this.getWidth() - 2*spacingX, this.getHeight() - (4*spacingY + buttonY));
 		add(textArea);
-		
+
 		Button btnClose=new Button();
 		btnClose.setLabel("Close");
 		btnClose.setBounds(this.getWidth()/2 - buttonX/2,this.getHeight() - (spacingY + buttonY), buttonX, buttonY);
@@ -70,7 +70,7 @@ public class HelpFrame extends Frame {
 				dispose();
 			}
 		});
-		
+
 		addWindowListener(new WindowAdapter()
 		{
 			public void windowClosing(WindowEvent e){

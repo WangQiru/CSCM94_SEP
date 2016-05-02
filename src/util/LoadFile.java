@@ -29,7 +29,7 @@ public class LoadFile extends Frame {
 	 * Load the user commands from a .draw file.
 	 */
 
-	
+
 	public LoadFile() {
 		FileDialog fc=new FileDialog(this,"Load from a file",0);
 		fc.setFile("*.draw");

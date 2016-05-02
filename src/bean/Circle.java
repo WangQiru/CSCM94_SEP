@@ -12,11 +12,11 @@ import java.awt.geom.Ellipse2D;
  */
 
 public class Circle extends Shape {
-	
+
 	public Circle(double radius){
 		this.radius=radius;
 	}
-	
+
 
 	@Override
 	public boolean deleteNode() {
@@ -30,7 +30,7 @@ public class Circle extends Shape {
 		this.radius=radius;
 		return false;
 	}
-	
+
 	@Override
 	public double getRadius() {
 		return this.radius;
@@ -49,7 +49,7 @@ public class Circle extends Shape {
 			return true;
 		}
 		return false;
-		
+
 	}
 
 

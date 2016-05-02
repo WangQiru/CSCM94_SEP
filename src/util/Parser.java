@@ -24,13 +24,13 @@ import bean.Union;
 
 public class Parser {
 	private static ArrayList<String> errList = new ArrayList<String>();
-	
+
 	/**
 	 * Parse user input into Nodes
 	 * @param input the user input 
 	 * @return return a Node
 	 */
-	
+
 	public static Node parse(String input){
 		//Removing all newlines, tabs and whitespace from input string
 		String instructions = input.replaceAll("\n", "").replaceAll("\t", "").replaceAll(" ", "").replaceAll("\r", "");
@@ -62,7 +62,7 @@ public class Parser {
 						errList.add("You have entered wrong format of arguments for \""+instructions+"\"");
 				}
 				else
-				errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
+					errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 			}
 
 			else if (instructions.startsWith("Triangle(")){		
@@ -84,7 +84,7 @@ public class Parser {
 						errList.add("You have entered wrong format of arguments for \""+instructions+"\"");
 				}
 				else
-				errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
+					errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 			}
 
 			//A curve segment is defined by 4 points, each with an x and y value (8 values total) or 1 point wit an x ad y value (2 values total)
@@ -152,7 +152,7 @@ public class Parser {
 						errList.add("You have entered wrong format of arguments for \""+instructions+"\"");
 				}
 				else
-				errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
+					errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 			}
 
 			else if (instructions.startsWith("Rotate(")){
@@ -163,7 +163,7 @@ public class Parser {
 						errList.add("You have entered wrong format of arguments for \""+instructions+"\"");
 				}
 				else
-				errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
+					errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 			}
 
 			else if (instructions.startsWith("TranslateN(")){
@@ -174,7 +174,7 @@ public class Parser {
 						errList.add("You have entered wrong format of arguments for \""+instructions+"\"");
 				}
 				else
-				errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
+					errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 			}
 
 			else if (instructions.startsWith("Translate(")){
@@ -185,7 +185,7 @@ public class Parser {
 						errList.add("You have entered wrong format of arguments for \""+instructions+"\"");
 				}
 				else
-				errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
+					errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 			}
 
 			else if (instructions.startsWith("ScaleN(")){
@@ -203,7 +203,7 @@ public class Parser {
 						errList.add("You have entered wrong format of arguments for \""+instructions+"\"");
 				}
 				else
-				errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
+					errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 			}
 
 			else if (instructions.startsWith("Scale(")){
@@ -220,7 +220,7 @@ public class Parser {
 						errList.add("You have entered wrong format of arguments for \""+instructions+"\"");
 				}
 				else
-				errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
+					errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 			}
 
 			//MIXES
@@ -235,7 +235,7 @@ public class Parser {
 					return new Union(mixNodes);
 				}
 				else
-				errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
+					errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 			}
 
 			else if (instructions.startsWith("Intersection(")){
@@ -247,7 +247,7 @@ public class Parser {
 					return new Intersection(mixNodes);					
 				}
 				else
-				errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
+					errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 			}
 
 			else if (instructions.startsWith("Difference(")){
@@ -259,27 +259,27 @@ public class Parser {
 					return new Difference(mixNodes);
 				}
 				else
-				errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
+					errList.add("You have entered wrong number of arguments for \""+instructions+"\"");
 			}
 			else
 				errList.add("You have a syntax error near \""+instructions.substring(0, Math.min(12,Math.min(instructions.length(),instructions.indexOf('('))))+"\"");
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 
 	 * Store error occurred when parsing the user input instructions
 	 * 
 	 */
-	
+
 	public static ArrayList<String> returnErrList(){
 		ArrayList<String> temp=new ArrayList<String>(errList);
 		errList.clear();
 		return temp;
 	}
 
-	
+
 	/**
 	 * Split the user input instructions into a well-formatted ArrayList 
 	 * @param instructions the user input instructions
@@ -341,7 +341,7 @@ public class Parser {
 	 * @param fixedArgSize if he number of parameters for the Node type should be fixed
 	 * @return return true if the number of parameters is correct
 	 */
-	
+
 	public static boolean checkArgSize(int inputSize,int correctSize, boolean fixedArgSize){
 		if(fixedArgSize){
 			if (inputSize!=correctSize)
@@ -352,7 +352,7 @@ public class Parser {
 				return false;
 		return true;		
 	}
-	
+
 	/**
 	 * Check if the parameter is parsable to Integer
 	 * @param str the user input parameter
@@ -369,13 +369,13 @@ public class Parser {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Check if the parameter is parsable to Double
 	 * @param str the user input parameter
 	 * @return return true if the parameter if parsable
 	 */
-	
+
 	public static boolean checkDouble(String str){
 		try
 		{
@@ -387,13 +387,13 @@ public class Parser {
 			return false;
 		}		
 	}
-	
+
 	/**
 	 * Parse user input into Nodes
 	 * @param str the formatted input 
 	 * @return return true if the number of brackets is correct
 	 */
-	
+
 	public static boolean checkBrackets(String str){
 		if (str.trim().length() == 0){
 			return false;

@@ -16,7 +16,7 @@ public class Triangle extends Shape{
 	public Triangle(double radius){
 		this.radius=radius;
 	}
-	
+
 	@Override
 	public boolean deleteNode() {
 		// TODO Auto-generated method stub
@@ -34,7 +34,7 @@ public class Triangle extends Shape{
 	public double getRadius() {
 		return this.radius;
 	}
-	
+
 
 
 	@Override

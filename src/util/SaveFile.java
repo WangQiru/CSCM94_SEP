@@ -32,7 +32,7 @@ public class SaveFile extends Frame {
 			try (
 					FileWriter fileWriter = new FileWriter(fc.getDirectory()+fc.getFile()+extension);
 					BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);						
-				) 
+					) 
 			{
 				bufferedWriter.write(commands);
 				bufferedWriter.close();

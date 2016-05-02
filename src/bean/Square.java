@@ -16,7 +16,7 @@ public class Square extends Shape {
 	public Square(double radius){
 		this.radius=radius;
 	}
-	
+
 	@Override
 	public boolean deleteNode() {
 		// TODO Auto-generated method stub
@@ -34,7 +34,7 @@ public class Square extends Shape {
 	public double getRadius() {
 		return this.radius;
 	}
-	
+
 
 	@Override
 	public String print() {

@@ -19,13 +19,13 @@ public class Rotate extends Transform {
 		this.angle = Math.toRadians(angle);
 		this.repeat = 1;
 	}
-	
+
 	public Rotate(Node inputNode, double angle, int repeat){
 		this.inputNode = inputNode;
 		this.angle = Math.toRadians(angle);
 		this.repeat = repeat;
 	}
-	
+
 	@Override
 	public boolean deleteNode() {
 		// TODO Auto-generated method stub

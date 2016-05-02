@@ -28,13 +28,13 @@ public class Translate extends Transform {
 		this.distanceY=distanceY;
 		this.repeat = repeat;
 	}
-	
+
 	@Override
 	public boolean deleteNode() {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 	@Override
 	public Node getInputNode() {
 		return this.inputNode;

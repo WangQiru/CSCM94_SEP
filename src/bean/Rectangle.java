@@ -11,9 +11,9 @@ import java.awt.geom.Area;
  */
 
 public class Rectangle extends Shape {
-	
+
 	public double yRadius;
-	
+
 	public Rectangle(double radius, double yRadius) {
 		this.radius = radius;
 		this.yRadius = yRadius;
@@ -37,7 +37,7 @@ public class Rectangle extends Shape {
 	public double getRadius() {
 		return this.radius;
 	}
-	
+
 
 	@Override
 	public String print() {
@@ -51,7 +51,7 @@ public class Rectangle extends Shape {
 			return true;
 		}
 		return false;
-		
+
 	}
 
 

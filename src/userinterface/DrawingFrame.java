@@ -119,9 +119,9 @@ public class DrawingFrame extends Frame {
 						helpText+= (i+1) + ". " + errList.get(i)+" \n\n";
 					}
 
-					
+
 					error.init(helpText);
-				
+
 				}
 				else {
 					canvas.drawPixels(rootNode, colourList[colourChooser.getSelectedIndex()]);
@@ -150,9 +150,9 @@ public class DrawingFrame extends Frame {
 						helpText+= (i+1) + ". " + errList.get(i)+" \n\n";
 					}
 
-				
+
 					error.init(helpText);
-				
+
 				}
 				else
 					canvas.drawArea(rootNode, colourList[colourChooser.getSelectedIndex()]);

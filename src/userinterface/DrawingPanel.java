@@ -19,20 +19,20 @@ import bean.Node;
 
 @SuppressWarnings("serial")
 public class DrawingPanel extends Panel {
-	
+
 	public DrawingPanel(){
 	}
-	
+
 	//Method for drawing an Area
 	public void drawArea(Node rootNode, Color colour){
 		Graphics2D canvasGraphics = (Graphics2D)this.getGraphics();
-		
+
 		//Drawing the axes
 		drawAxes();
-		
+
 		//Setting the origin to be in the middle of the canvas
 		canvasGraphics.translate(this.getWidth()/2, this.getHeight()/2);
-		
+
 		//Flipping the coordinates vertically so that y increases as you go up, not down
 		AffineTransform flipVertical = AffineTransform.getScaleInstance(1, -1);
 		canvasGraphics.transform(flipVertical);
@@ -42,7 +42,7 @@ public class DrawingPanel extends Panel {
 		canvasGraphics.fill(finalArea);
 		paint(canvasGraphics);
 	}
-	
+
 	public void drawAxes(){
 		Graphics2D axesGraphics = (Graphics2D)this.getGraphics();
 		//Clearing the canvas
@@ -77,16 +77,16 @@ public class DrawingPanel extends Panel {
 		pixelGraphics.drawImage(pixelCanvas, null, null);
 		paint(pixelGraphics);
 	}
-	
+
 	public void drawError(String error){
 		Graphics2D errorGraphics = (Graphics2D)this.getGraphics();
 		errorGraphics.clearRect(0, 0, getWidth(), getHeight());
-	    Font font = new Font("Courier", Font.PLAIN, 40);		
-	    errorGraphics.setColor(Color.red);
-	    errorGraphics.setFont(font);
-	    errorGraphics.drawString(error, 0, this.getHeight()/2);
+		Font font = new Font("Courier", Font.PLAIN, 40);		
+		errorGraphics.setColor(Color.red);
+		errorGraphics.setFont(font);
+		errorGraphics.drawString(error, 0, this.getHeight()/2);
 		paint(errorGraphics);
 		return;
-		
+
 	}
 }
