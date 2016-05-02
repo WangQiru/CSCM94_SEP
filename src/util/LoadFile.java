@@ -50,5 +50,8 @@ public class LoadFile extends Frame {
 				System.err.format("IOException: %s%n", x);
 			}
 		}
+		else {
+			this.setContent(null);
+		}
 	}
 }

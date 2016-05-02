@@ -25,10 +25,14 @@ public class SaveFile extends Frame {
 		FileDialog fc=new FileDialog(this,"Save to a file",1);
 		fc.setVisible(true);
 		if(fc.getFile()!=null){
+			String extension = new String("");
+			if (!fc.getFile().endsWith(".draw")){
+				extension = ".draw";
+			}
 			try (
-					FileWriter fileWriter = new FileWriter(fc.getDirectory()+fc.getFile()+".draw");
+					FileWriter fileWriter = new FileWriter(fc.getDirectory()+fc.getFile()+extension);
 					BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);						
-					) 
+				) 
 			{
 				bufferedWriter.write(commands);
 				bufferedWriter.close();

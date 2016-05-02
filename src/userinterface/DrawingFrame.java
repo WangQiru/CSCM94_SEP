@@ -177,7 +177,9 @@ public class DrawingFrame extends Frame {
 		btnLoad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				LoadFile lf = new LoadFile();
-				textBox.setText(lf.getContent());
+				if (lf.getContent() != null){
+					textBox.setText(lf.getContent());
+				}
 			}
 		});
 
@@ -252,7 +254,7 @@ public class DrawingFrame extends Frame {
 				System.exit(0);
 			}
 		});
-		//Drawing axes to the canvas on window initialization. Doesn't always work for some reason.
+		//Drawing axes to the canvas on window initialization. Done last to avoid axes being cleared/overwritten during initialization
 		canvas.drawAxes();
 	}
 
