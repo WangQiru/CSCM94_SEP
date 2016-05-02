@@ -5,16 +5,34 @@ import java.awt.Frame;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+/**
+ * 	@class SaveFile
+ *	This SaveFile class initializes a FileDialog for saving existing drawing into a file.
+ *
+ *  @author Donal Evans
+ *  @author Qiru Wang
+ */
 
+@SuppressWarnings("serial")
 public class SaveFile extends Frame {
+
+	/**
+	 * Save the user commands into a .draw file
+	 * @param commands the user commands
+	 */
+
 	public SaveFile(String commands) {
 		FileDialog fc=new FileDialog(this,"Save to a file",1);
 		fc.setVisible(true);
 		if(fc.getFile()!=null){
+			String extension = new String("");
+			if (!fc.getFile().endsWith(".draw")){
+				extension = ".draw";
+			}
 			try (
-					FileWriter fileWriter = new FileWriter(fc.getDirectory()+fc.getFile()+".draw");
+					FileWriter fileWriter = new FileWriter(fc.getDirectory()+fc.getFile()+extension);
 					BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);						
-					) 
+				) 
 			{
 				bufferedWriter.write(commands);
 				bufferedWriter.close();
@@ -24,3 +42,4 @@ public class SaveFile extends Frame {
 		}
 	}
 }
+

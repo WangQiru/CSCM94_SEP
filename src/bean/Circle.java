@@ -2,12 +2,19 @@ package bean;
 
 import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
+/**
+ * 	@class Circle
+ *	This Circle class serves as an object.
+ *	Is inherited from Shape.
+ *
+ *  @author Donal Evans
+ *  @author Qiru Wang
+ */
 
 public class Circle extends Shape {
 	
-	public Circle(double radius, String color){
+	public Circle(double radius){
 		this.radius=radius;
-		this.color=color;
 	}
 	
 
@@ -19,36 +26,29 @@ public class Circle extends Shape {
 
 
 	@Override
-	public boolean setColor(String color) {
-		return false;
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
 	public boolean setRadius(double radius) {
-		// TODO Auto-generated method stub
 		this.radius=radius;
 		return false;
 	}
 	
 	@Override
 	public double getRadius() {
-		// TODO Auto-generated method stub
 		return this.radius;
 	}
 
 
 	@Override
 	public String print() {
-		return "Circle(" + this.radius + "," + this.color + ")";
+		return "Circle(" + this.radius + ")";
 	}
 
 
 	@Override
-	public void drawPixel(int x, int y) {
-		// TODO Auto-generated method stub
+	public boolean drawPixel(double x, double y) {
+		if ((x*x) + (y*y) < this.radius*this.radius){
+			return true;
+		}
+		return false;
 		
 	}
 
