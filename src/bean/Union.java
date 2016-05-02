@@ -1,18 +1,10 @@
 package bean;
 
 import java.awt.geom.Area;
-import java.util.ArrayList;
-/**
- * 	@class Union
- *	This Union class serves as an object.
- *	Is inherited from Mix.
- *
- *  @author Donal Evans
- *  @author Qiru Wang
- */
+import java.util.List;
 
 public class Union extends Mix {
-	public Union(ArrayList<Node> inputNodes){
+	public Union(List<Node> inputNodes){
 		this.inputNodes = inputNodes;
 	}
 
@@ -36,12 +28,9 @@ public class Union extends Mix {
 
 
 	@Override
-	public boolean drawPixel(double x, double y) {
-		boolean unionNodes = false;
-		for (int i = 0; i < this.inputNodes.size(); ++i){
-			unionNodes = unionNodes || this.inputNodes.get(i).drawPixel(x, y);
-		}
-		return unionNodes;
+	public void drawPixel(int x, int y) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

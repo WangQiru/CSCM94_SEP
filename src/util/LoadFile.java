@@ -6,15 +6,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-/**
- * 	@class LoadFile
- *	This LoadFile class initializes a FileDialog for loading existing drawing from a file.
- *
- *  @author Donal Evans
- *  @author Qiru Wang
- */
-
-@SuppressWarnings("serial")
 public class LoadFile extends Frame {
 	private String content;
 	public String getContent() {
@@ -24,11 +15,6 @@ public class LoadFile extends Frame {
 	public void setContent(String content) {
 		this.content = content;
 	}
-
-	/**
-	 * Load the user commands from a .draw file.
-	 */
-
 	
 	public LoadFile() {
 		FileDialog fc=new FileDialog(this,"Load from a file",0);
@@ -43,7 +29,7 @@ public class LoadFile extends Frame {
 				String line = null;
 				String commands = "";
 				while ((line = bufferedReader.readLine()) != null) {
-					commands+=line + "\n";
+					commands+=line;
 				}
 				bufferedReader.close();
 				this.setContent(commands);
@@ -51,8 +37,10 @@ public class LoadFile extends Frame {
 				System.err.format("IOException: %s%n", x);
 			}
 		}
-		else {
-			this.setContent(null);
-		}
+	}
+
+	
+	public static void main(String[] args) {
+	
 	}
 }

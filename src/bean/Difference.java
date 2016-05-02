@@ -1,19 +1,10 @@
 package bean;
 
 import java.awt.geom.Area;
-import java.util.ArrayList;
-
-/**
- * 	@class Difference
- *	This Difference class serves as an object.
- *	Is inherited from Mix.
- *
- *  @author Donal Evans
- *  @author Qiru Wang
- */
+import java.util.List;
 
 public class Difference extends Mix {
-	public Difference(ArrayList<Node> inputNodes){
+	public Difference(List<Node> inputNodes){
 		this.inputNodes = inputNodes;
 	}
 
@@ -37,12 +28,9 @@ public class Difference extends Mix {
 
 
 	@Override
-	public boolean drawPixel(double x, double y) {
-		boolean subtractedNodes = false;
-		for (int i = 1; i < this.inputNodes.size(); ++i){
-			subtractedNodes = subtractedNodes || this.inputNodes.get(i).drawPixel(x, y);
-		}
-		return (this.inputNodes.get(0).drawPixel(x, y) && !subtractedNodes);
+	public void drawPixel(int x, int y) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

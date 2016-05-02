@@ -1,22 +1,17 @@
 package bean;
+
 import java.awt.Polygon;
 import java.awt.geom.Area;
-/**
- * 	@class Rectangle
- *	This Rectangle class serves as an object.
- *	Is inherited from Shape.
- *
- *  @author Donal Evans
- *  @author Qiru Wang
- */
 
 public class Rectangle extends Shape {
 	
 	public double yRadius;
 	
-	public Rectangle(double radius, double yRadius) {
+	public Rectangle(double radius, double yRadius, String color) {
+		super();
 		this.radius = radius;
 		this.yRadius = yRadius;
+		this.color = color;
 	}
 
 
@@ -26,31 +21,38 @@ public class Rectangle extends Shape {
 		return false;
 	}
 
+	@Override
+	public boolean setColor(String color) {
+		return false;
+		// TODO Auto-generated method stub
+		
+	}
+
 
 	@Override
 	public boolean setRadius(double radius) {
+		// TODO Auto-generated method stub
 		this.radius=radius;
 		return false;
 	}
 
 	@Override
 	public double getRadius() {
+		// TODO Auto-generated method stub
 		return this.radius;
 	}
 	
 
+
 	@Override
 	public String print() {
-		return "Rectangle(" + this.radius + "," + this.yRadius + ")";
+		return "Rectangle(" + this.radius + "," + this.yRadius + "," + this.color + ")";
 	}
 
 
 	@Override
-	public boolean drawPixel(double x, double y) {
-		if (x >= -this.radius && x < this.radius && y >= -this.yRadius && y < this.yRadius){
-			return true;
-		}
-		return false;
+	public void drawPixel(int x, int y) {
+		// TODO Auto-generated method stub
 		
 	}
 

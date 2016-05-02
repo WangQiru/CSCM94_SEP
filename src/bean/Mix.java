@@ -1,16 +1,9 @@
 package bean;
 
-import java.util.ArrayList;
-/**
- * 	@class Mix
- *	This Mix class serves as an implementation of Node.
- *
- *  @author Donal Evans
- *  @author Qiru Wang
- */
+import java.util.List;
 
 public abstract class Mix implements Node {
 	
-	public ArrayList<Node> inputNodes;
+	public List<Node> inputNodes;
 
 }

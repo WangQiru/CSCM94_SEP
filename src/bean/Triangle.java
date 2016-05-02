@@ -2,19 +2,12 @@ package bean;
 
 import java.awt.Polygon;
 import java.awt.geom.Area;
-/**
- * 	@class Triangle
- *	This Triangle class serves as an object.
- *	Is inherited from Shape.
- *
- *  @author Donal Evans
- *  @author Qiru Wang
- */
 
 public class Triangle extends Shape{
 
-	public Triangle(double radius){
+	public Triangle(double radius, String color){
 		this.radius=radius;
+		this.color=color;
 	}
 	
 	@Override
@@ -22,16 +15,25 @@ public class Triangle extends Shape{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	@Override
+	public boolean setColor(String color) {
+		return false;
+		// TODO Auto-generated method stub
+		
+	}
 
 
 	@Override
 	public boolean setRadius(double radius) {
+		// TODO Auto-generated method stub
 		this.radius=radius;
 		return false;
 	}
 
 	@Override
 	public double getRadius() {
+		// TODO Auto-generated method stub
 		return this.radius;
 	}
 	
@@ -39,16 +41,14 @@ public class Triangle extends Shape{
 
 	@Override
 	public String print() {
-		return "Triangle(" + this.radius + ")";
+		return "Triangle(" + this.radius + "," + this.color + ")";
 	}
 
 
 	@Override
-	public boolean drawPixel(double x, double y) {
-		if((y < this.radius + Math.sqrt(3)*x) && (y > -this.radius/2) && (y < this.radius - Math.sqrt(3)*x)){
-			return true;
-		}
-		return false;
+	public void drawPixel(int x, int y) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
