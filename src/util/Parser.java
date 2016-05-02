@@ -34,7 +34,6 @@ public class Parser {
 	public static Node parse(String input){
 		//Removing all newlines, tabs and whitespace from input string
 		String instructions = input.replaceAll("\n", "").replaceAll("\t", "").replaceAll(" ", "").replaceAll("\r", "");
-
 		//Using getArgList to produce a list of the comma separated arguments
 		ArrayList<String> argList = getArgList(instructions);
 
