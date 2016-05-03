@@ -1,5 +1,4 @@
 # CS_CM94_CSG
-CS-CM94 CSG Project
 
 How to import into Eclipse:
 
