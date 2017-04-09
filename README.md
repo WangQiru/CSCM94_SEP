@@ -1,14 +1,13 @@
 # CS_CM94_CSG
 
-How to import into Eclipse:
+By Lecturers: 
+[Dr. Robert S. Laramee](http://www.swansea.ac.uk/staff/science/computer-science/r.s.laramee/)
+[Dr. Benjamin Mora](http://www.swansea.ac.uk/staff/science/computer-science/b.mora/) in Swansea University
 
-1. Select Import from File menu
-2. Select Git and "Project from Git", click next
-3. Select "Clone URI" then next
-4. In URI field, enter:
-    https://github.com/Wang-Qiru/CS_CM94_CSG
-5. In Authtication field, enter your Github username and password then next
-6. Tick "master" then next
-7. Select the directory as preferred then next
-8. Wait until the process is done, and select "Import exsiting Eclipse projects".
-9. Click Finish and voilà!
+Grade composition:
+   1. Coursework 1: 91
+   2. Examination 1: 80
+
+Final grade:  86
+
+<img src="https://www.dropbox.com/s/l0tklnqmcl3ahcf/swansea-university-logo.svg?dl=1" alt="Swansea University Logo" width="300px">
