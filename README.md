@@ -1,8 +1,7 @@
 # CS_CM94_CSG
 
 By Lecturers: 
-[Dr. Robert S. Laramee](http://www.swansea.ac.uk/staff/science/computer-science/r.s.laramee/)
-[Dr. Benjamin Mora](http://www.swansea.ac.uk/staff/science/computer-science/b.mora/) in Swansea University
+[Dr. Robert S. Laramee](http://www.swansea.ac.uk/staff/science/computer-science/r.s.laramee/) and [Dr. Benjamin Mora](http://www.swansea.ac.uk/staff/science/computer-science/b.mora/) in Swansea University
 
 Grade composition:
    1. Coursework 1: 91
