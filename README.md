@@ -9,4 +9,4 @@ Grade composition:
 
 Final grade:  86
 
-<img src="https://www.dropbox.com/s/l0tklnqmcl3ahcf/swansea-university-logo.svg?dl=1?sanitize=true" alt="Swansea University Logo" width="300px">
+<img src="http://share.wangqiru.com/j9VgtP+" alt="Swansea University Logo" width="300px">
